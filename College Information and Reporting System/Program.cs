@@ -1,4 +1,10 @@
 using College_Information_and_Reporting_System.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
+
+//dotnet ef migrations add InitialCreate
+//dotnet ef database update
+//for creating tables from the models (migration folder)
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,14 +14,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<AppDbContext>(options =>
- 
-
+// Configure EF Core
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
 var app = builder.Build();
 
 //app.UseDeveloperExceptionPage();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

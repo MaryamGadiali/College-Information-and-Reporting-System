@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using College_Information_and_Reporting_System.Data;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
 
 namespace College_Information_and_Reporting_System.Controllers
@@ -8,6 +9,14 @@ namespace College_Information_and_Reporting_System.Controllers
     [Route("api")]
     public class APIController : ControllerBase
     {
+
+        private readonly AppDbContext _db;
+
+        public APIController(AppDbContext db)
+        {
+            _db = db;
+        }
+
         [HttpGet("Hello")]
         public string Hello()
         {
@@ -16,9 +25,10 @@ namespace College_Information_and_Reporting_System.Controllers
         }
 
         [HttpGet("Welcome")]
-        public string Welcome([FromQuery]  string? name="Bob")
+        public IEnumerable<string> Welcome([FromQuery] string? name = "Bob")
         {
-            return HtmlEncoder.Default.Encode($"Hello {name}");
+            return _db.students.Select(s => s.Name).ToList();
+            //return HtmlEncoder.Default.Encode($"Hello {name}");
         }
 
         [HttpGet("PathVar/{name}")]
