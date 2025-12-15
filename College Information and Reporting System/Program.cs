@@ -2,6 +2,7 @@ using College_Information_and_Reporting_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 
+// dotnet ef migrations remove
 //dotnet ef migrations add InitialCreate
 //dotnet ef database update
 //for creating tables from the models (migration folder)

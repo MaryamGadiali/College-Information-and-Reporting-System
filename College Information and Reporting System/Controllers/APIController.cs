@@ -27,7 +27,7 @@ namespace College_Information_and_Reporting_System.Controllers
         [HttpGet("Welcome")]
         public IEnumerable<string> Welcome([FromQuery] string? name = "Bob")
         {
-            return _db.students.Select(s => s.Name).ToList();
+            return _db.students.Select(s => s.studentFirstName).ToList();
             //return HtmlEncoder.Default.Encode($"Hello {name}");
         }
 
