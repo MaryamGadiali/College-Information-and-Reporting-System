@@ -1,3 +1,4 @@
+using College_Information_and_Reporting_System;
 using College_Information_and_Reporting_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
@@ -18,6 +19,9 @@ builder.Services.AddSwaggerGen();
 // Configure EF Core
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+
+//seed data
+builder.Services.AddHostedService<DatabaseSeeder>();
 
 var app = builder.Build();
 

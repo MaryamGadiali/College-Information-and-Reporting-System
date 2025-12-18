@@ -7,7 +7,7 @@
         public string departmentCode { get; set; }
         public string departmentHead {  get; set; }
 
-        public ICollection<Course> CourseList { get; set; }
+        public ICollection<Course> courseList { get; set; }
 
     }
 }

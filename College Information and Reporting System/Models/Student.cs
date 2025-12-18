@@ -24,7 +24,10 @@ namespace College_Information_and_Reporting_System.Models
 
         public DateTime createdAt { get; set; }
 
-        public ICollection<Course> courses { get; set; }
+        public ICollection<Course> courses { get; set; } = new List<Course>();
+
+
+
 
 
 

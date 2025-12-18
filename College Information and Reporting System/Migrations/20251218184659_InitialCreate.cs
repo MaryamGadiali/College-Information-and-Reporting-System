@@ -12,7 +12,7 @@ namespace College_Information_and_Reporting_System.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Department",
+                name: "departments",
                 columns: table => new
                 {
                     departmentId = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,7 @@ namespace College_Information_and_Reporting_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Department", x => x.departmentId);
+                    table.PrimaryKey("PK_departments", x => x.departmentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,12 +48,11 @@ namespace College_Information_and_Reporting_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Course",
+                name: "courses",
                 columns: table => new
                 {
                     courseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    courseCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     courseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     budget = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     isActive = table.Column<bool>(type: "bit", nullable: false),
@@ -62,12 +61,40 @@ namespace College_Information_and_Reporting_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Course", x => x.courseId);
+                    table.PrimaryKey("PK_courses", x => x.courseId);
                     table.ForeignKey(
-                        name: "FK_Course_Department_departmentId",
+                        name: "FK_courses_departments_departmentId",
                         column: x => x.departmentId,
-                        principalTable: "Department",
+                        principalTable: "departments",
                         principalColumn: "departmentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "attendances",
+                columns: table => new
+                {
+                    attendanceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    attendanceTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    attendanceStatus = table.Column<int>(type: "int", nullable: false),
+                    studentId = table.Column<int>(type: "int", nullable: false),
+                    courseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_attendances", x => x.attendanceId);
+                    table.ForeignKey(
+                        name: "FK_attendances_courses_courseId",
+                        column: x => x.courseId,
+                        principalTable: "courses",
+                        principalColumn: "courseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_attendances_students_studentId",
+                        column: x => x.studentId,
+                        principalTable: "students",
+                        principalColumn: "studentId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -82,9 +109,9 @@ namespace College_Information_and_Reporting_System.Migrations
                 {
                     table.PrimaryKey("PK_CourseStudent", x => new { x.coursescourseId, x.studentsstudentId });
                     table.ForeignKey(
-                        name: "FK_CourseStudent_Course_coursescourseId",
+                        name: "FK_CourseStudent_courses_coursescourseId",
                         column: x => x.coursescourseId,
-                        principalTable: "Course",
+                        principalTable: "courses",
                         principalColumn: "courseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -96,8 +123,18 @@ namespace College_Information_and_Reporting_System.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Course_departmentId",
-                table: "Course",
+                name: "IX_attendances_courseId",
+                table: "attendances",
+                column: "courseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_attendances_studentId",
+                table: "attendances",
+                column: "studentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_courses_departmentId",
+                table: "courses",
                 column: "departmentId");
 
             migrationBuilder.CreateIndex(
@@ -110,16 +147,19 @@ namespace College_Information_and_Reporting_System.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "attendances");
+
+            migrationBuilder.DropTable(
                 name: "CourseStudent");
 
             migrationBuilder.DropTable(
-                name: "Course");
+                name: "courses");
 
             migrationBuilder.DropTable(
                 name: "students");
 
             migrationBuilder.DropTable(
-                name: "Department");
+                name: "departments");
         }
     }
 }

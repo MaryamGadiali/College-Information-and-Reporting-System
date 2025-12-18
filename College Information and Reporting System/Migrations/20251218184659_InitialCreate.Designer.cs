@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College_Information_and_Reporting_System.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251215105857_InitialCreate")]
+    [Migration("20251218184659_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,6 +25,35 @@ namespace College_Information_and_Reporting_System.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("College_Information_and_Reporting_System.Models.Attendance", b =>
+                {
+                    b.Property<int>("attendanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("attendanceId"));
+
+                    b.Property<int>("attendanceStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("attendanceTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("courseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("studentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("attendanceId");
+
+                    b.HasIndex("courseId");
+
+                    b.HasIndex("studentId");
+
+                    b.ToTable("attendances");
+                });
+
             modelBuilder.Entity("College_Information_and_Reporting_System.Models.Course", b =>
                 {
                     b.Property<int>("courseId")
@@ -35,10 +64,6 @@ namespace College_Information_and_Reporting_System.Migrations
 
                     b.Property<decimal>("budget")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("courseCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("courseName")
                         .IsRequired()
@@ -57,7 +82,7 @@ namespace College_Information_and_Reporting_System.Migrations
 
                     b.HasIndex("departmentId");
 
-                    b.ToTable("Course");
+                    b.ToTable("courses");
                 });
 
             modelBuilder.Entity("College_Information_and_Reporting_System.Models.Department", b =>
@@ -82,7 +107,7 @@ namespace College_Information_and_Reporting_System.Migrations
 
                     b.HasKey("departmentId");
 
-                    b.ToTable("Department");
+                    b.ToTable("departments");
                 });
 
             modelBuilder.Entity("College_Information_and_Reporting_System.Models.Student", b =>
@@ -142,10 +167,29 @@ namespace College_Information_and_Reporting_System.Migrations
                     b.ToTable("CourseStudent");
                 });
 
+            modelBuilder.Entity("College_Information_and_Reporting_System.Models.Attendance", b =>
+                {
+                    b.HasOne("College_Information_and_Reporting_System.Models.Course", "course")
+                        .WithMany()
+                        .HasForeignKey("courseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("College_Information_and_Reporting_System.Models.Student", "student")
+                        .WithMany()
+                        .HasForeignKey("studentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("course");
+
+                    b.Navigation("student");
+                });
+
             modelBuilder.Entity("College_Information_and_Reporting_System.Models.Course", b =>
                 {
                     b.HasOne("College_Information_and_Reporting_System.Models.Department", "department")
-                        .WithMany("CourseList")
+                        .WithMany("courseList")
                         .HasForeignKey("departmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -170,7 +214,7 @@ namespace College_Information_and_Reporting_System.Migrations
 
             modelBuilder.Entity("College_Information_and_Reporting_System.Models.Department", b =>
                 {
-                    b.Navigation("CourseList");
+                    b.Navigation("courseList");
                 });
 #pragma warning restore 612, 618
         }
