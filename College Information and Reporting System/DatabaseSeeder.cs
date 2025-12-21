@@ -1,6 +1,8 @@
 ﻿
 using College_Information_and_Reporting_System.Data;
 using College_Information_and_Reporting_System.Models;
+using System;
+using System.Reflection.Metadata;
 
 namespace College_Information_and_Reporting_System
 {
@@ -153,6 +155,15 @@ namespace College_Information_and_Reporting_System
                 var john = students.First(s => s.studentFirstName == "John");
                 var jane = students.First(s => s.studentFirstName == "Jane");
                 var alice = students.First(s => s.studentFirstName == "Alice");
+                var bob = students.First(s => s.studentFirstName == "Bob");
+                var charlie = students.First(s => s.studentFirstName == "Charlie");
+                var vanessa = students.First(s => s.studentFirstName == "Vanessa");
+                var emma = students.First(s => s.studentFirstName == "Emma");
+                var michael = students.First(s => s.studentFirstName == "Michael");
+                var sarah = students.First(s => s.studentFirstName == "Sarah");
+                var david = students.First(s => s.studentFirstName == "David");
+
+
 
                 var pureMaths = courses.First(p => p.courseName == "Pure Maths");
                 var Statistics = courses.First(p => p.courseName == "Statistics");
@@ -161,36 +172,41 @@ namespace College_Information_and_Reporting_System
                 var Chemistry = courses.First(p => p.courseName == "Chemistry");
                 var Physics = courses.First(p => p.courseName == "Physics");
 
-                var attendanceRecords = new List<Attendance>
+                var attendanceRecords = new List<Attendance>();
+                var attendanceDates = Enumerable.Range(1, 30).Select(d=>DateTime.Parse($"2023-09-{d:D2}")).ToList();
+                var random = new Random();
+                foreach (var student in students)
                 {
-                    //new Attendance{attendanceTime=DateTime.Parse("2023-09-02 12:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=john, course=pureMaths},
-                    //new Attendance{attendanceTime=DateTime.Parse("2023-09-03 12:00"), attendanceStatus=Enums.AttendanceStatus.Absent, student=john, course=Physics},
-                    //new Attendance{attendanceTime=DateTime.Parse("2023-09-03 12:00"), attendanceStatus=Enums.AttendanceStatus.Absent, student=jane, course=Physics},
-                    //new Attendance{attendanceTime=DateTime.Parse("2023-09-04 12:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=jane, course=Statistics},
-                    //new Attendance{attendanceTime=DateTime.Parse("2023-09-05 12:00"), attendanceStatus=Enums.AttendanceStatus.Late, student=alice, course=Literature},
-                    //new Attendance{attendanceTime=DateTime.Parse("2023-09-06 12:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=alice, course=Chemistry}
+                    foreach (var course in student.courses)
+                    {
+                        foreach (var date in attendanceDates)
+                        {
+                            var randomValue = random.Next(0, 100);
+                            Enums.AttendanceStatus attendanceStatus;
+                            if (randomValue < 75) //get rid of authorised absence
+                            {
+                                attendanceStatus = Enums.AttendanceStatus.Present;
+                            }
+                            else if (randomValue < 85)
+                            {
+                                attendanceStatus = Enums.AttendanceStatus.Late;
+                            }
+                            else
+                            {
+                                attendanceStatus = Enums.AttendanceStatus.Absent;
+                            }
+                            attendanceRecords.Add(new Attendance
+                            {
+                                attendanceTime = date,
+                                attendanceStatus = attendanceStatus,
+                                student = student,
+                                course = course
+                            });
+                        }
 
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-02 09:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=john, course=pureMaths},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-04 09:00"), attendanceStatus=Enums.AttendanceStatus.Late, student=john, course=pureMaths},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-06 09:00"), attendanceStatus=Enums.AttendanceStatus.Absent, student=john, course=Physics},
+                    }
+                }
 
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-03 10:00"), attendanceStatus=Enums.AttendanceStatus.Absent, student=jane, course=Physics},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-05 10:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=jane, course=Statistics},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-07 10:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=jane, course=Statistics},
-
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-02 11:00"), attendanceStatus=Enums.AttendanceStatus.Late, student=alice, course=Literature},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-04 11:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=alice, course=Chemistry},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-06 11:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=alice, course=Chemistry},
-
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-03 09:00"), attendanceStatus=Enums.AttendanceStatus.Absent, student=students[8], course=Language},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-05 09:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=students[8], course=Literature},
-
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-04 10:00"), attendanceStatus=Enums.AttendanceStatus.Present, student=students[10], course=Chemistry},
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-06 10:00"), attendanceStatus=Enums.AttendanceStatus.Late, student=students[10], course=Statistics},
-
-                    new Attendance{attendanceTime=DateTime.Parse("2023-09-05 12:00"), attendanceStatus=Enums.AttendanceStatus.Absent, student=students[12], course=Literature}
-
-                  };
                 context.attendances.AddRange(attendanceRecords);
             }
             ;
@@ -199,3 +215,66 @@ namespace College_Information_and_Reporting_System
         }
     }
 
+
+
+//new Attendance { attendanceTime = DateTime.Parse("2023-09-02 09:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = john, course = pureMaths },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-04 09:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = john, course = pureMaths },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-06 09:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = john, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-08 09:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = john, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-10 09:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = john, course = pureMaths },
+
+
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-03 10:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = jane, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-05 10:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = jane, course = Statistics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-07 10:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = jane, course = Statistics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-09 10:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = jane, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-11 10:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = jane, course = Statistics },
+
+
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-02 11:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = alice, course = Literature },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-04 11:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = alice, course = Chemistry },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-06 11:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = alice, course = Chemistry },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-08 11:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = alice, course = Literature },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-10 11:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = alice, course = Chemistry },
+
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-03 12:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = bob, course = Literature },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-05 12:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = bob, course = Language },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-07 12:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = bob, course = Literature },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-09 12:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = bob, course = Language },
+
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-02 13:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = charlie, course = Chemistry },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-04 13:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = charlie, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-06 13:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = charlie, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-08 13:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = charlie, course = Chemistry },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-10 13:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = charlie, course = Physics },
+
+                 
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-03 14:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = vanessa, course = Statistics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-05 14:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = vanessa, course = Chemistry },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-07 14:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = vanessa, course = Statistics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-09 14:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = vanessa, course = Chemistry },
+
+                    
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-02 15:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = emma, course = Language },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-04 15:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = emma, course = pureMaths },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-06 15:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = emma, course = Language },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-08 15:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = emma, course = pureMaths },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-10 15:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = emma, course = Language },
+
+                   
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-03 16:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = michael, course = pureMaths },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-05 16:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = michael, course = Statistics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-07 16:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = michael, course = pureMaths },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-09 16:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = michael, course = Statistics },
+
+                 
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-02 17:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = sarah, course = Language },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-04 17:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = sarah, course = Literature },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-06 17:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = sarah, course = Language },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-08 17:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = sarah, course = Literature },
+
+               
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-03 18:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = david, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-05 18:00"), attendanceStatus = Enums.AttendanceStatus.Absent, student = david, course = Chemistry },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-07 18:00"), attendanceStatus = Enums.AttendanceStatus.Present, student = david, course = Physics },
+//                    new Attendance { attendanceTime = DateTime.Parse("2023-09-09 18:00"), attendanceStatus = Enums.AttendanceStatus.Late, student = david, course = Chemistry }
