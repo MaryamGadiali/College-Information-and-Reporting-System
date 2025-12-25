@@ -1,0 +1,33 @@
+﻿create function [dbo].[fn_GetStudentAttendanceRisk]
+(
+	@startDate date = '1900-01-01',
+	@endDate date = '9999-12-31',
+	@riskLevel decimal(5,2) = 70
+) returns table
+AS
+return (
+	--Gathers all attendance summaries for each student within a certain date interval
+	with attendanceCTE as(
+		 select
+		 s.studentid, s.studentFirstName, s.studentLastName,
+		 count(a.AttendanceId) as TotalSessions,
+         sum(case when a.AttendanceStatus = 0 then 1 else 0 end) as PresentSessions
+		 from attendances a left join students s on a.studentid=s.studentid
+	     where a.attendanceTime between @startdate and @enddate
+		 group by s.studentid, s.studentfirstname,s.studentlastname
+	)
+
+	--Selects Risk level based off the attendance summaries and outputs it
+	SELECT 
+	studentid, studentfirstname,studentlastname,
+	cast((PresentSessions*100.00 / nullif(TotalSessions,0)) as decimal(5,2)) as attendanceAvg,
+	case 
+		when (cast((PresentSessions*100.00 / nullif(TotalSessions,0)) as decimal(5,2))) < @riskLevel then 'At risk'
+		when (cast((PresentSessions*100.00 / nullif(TotalSessions,0)) as decimal(5,2))) between 70 and 85 then 'Monitor'
+		else 'Acceptable'
+	end as 'RiskStatus'
+	from attendanceCTE
+
+);
+
+
