@@ -1,0 +1,9 @@
+﻿@using College_Information_and_Reporting_System.Models
+@model List<Student>
+
+<h2>students</h2>
+
+@foreach (var student in Model)
+{
+    <p>@student.studentFirstName</p>
+}
