@@ -8,5 +8,6 @@ namespace College_Information_and_Reporting_System.Services
         List<Student> getStudents();
 
         List<StudentRiskDTO> getStudentRisks();
+        Task<Student> getStudentByIdAsync(int id);
     }
 }

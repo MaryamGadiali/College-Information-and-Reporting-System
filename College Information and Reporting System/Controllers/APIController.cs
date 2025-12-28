@@ -1,4 +1,6 @@
 ﻿using College_Information_and_Reporting_System.Data;
+using College_Information_and_Reporting_System.Models.Domain;
+using College_Information_and_Reporting_System.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
 
@@ -11,10 +13,12 @@ namespace College_Information_and_Reporting_System.Controllers
     {
 
         private readonly AppDbContext _db;
+        private readonly IStudentService _studentService;
 
-        public APIController(AppDbContext db)
+        public APIController(AppDbContext db, IStudentService studentService) //remove db
         {
             _db = db;
+            _studentService = studentService; 
         }
 
         [HttpGet("Hello")]
@@ -37,11 +41,25 @@ namespace College_Information_and_Reporting_System.Controllers
             return $"Hello {name}";
         }
 
+        //Path variable example
         [HttpGet("{id}")]
-        public IActionResult GetStudentById([FromRoute] int id)
+        public async Task<IActionResult> GetStudentById([FromRoute] int id)
         {
-            return Ok($"id={id}");
+            Console.WriteLine(id);
+            Student student = await _studentService.getStudentByIdAsync(id);
+            if (student == null)
+            {
+                return NotFound("Invalid student ID");
+            }
+            return Ok(student.studentFirstName);
         }
+
+        ////create new attendance record for student
+        //[HttpPost]
+        //public async Task<IActionResult> createAttendanceRecord([FromBody] Attendance attendance)
+        //{
+
+        //}
 
        
 
