@@ -1,6 +1,9 @@
 ﻿using College_Information_and_Reporting_System.Data;
-using College_Information_and_Reporting_System.Models;
+using College_Information_and_Reporting_System.Models.Domain;
+using College_Information_and_Reporting_System.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Entity.Core.Mapping;
 
 namespace College_Information_and_Reporting_System.Services
 {
@@ -14,9 +17,14 @@ namespace College_Information_and_Reporting_System.Services
             _db = db;
         }
 
-        public List<Student> getStudentDetails()
+        public List<Student> getStudents()
         {
             return _db.students.ToList();
+        }
+
+        public List<StudentRiskDTO> getStudentRisks()
+        {
+            return _db.studentRisks.ToList();
         }
     }
 }

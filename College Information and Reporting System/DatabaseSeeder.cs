@@ -1,6 +1,6 @@
 ﻿
 using College_Information_and_Reporting_System.Data;
-using College_Information_and_Reporting_System.Models;
+using College_Information_and_Reporting_System.Models.Domain;
 using System;
 using System.Reflection.Metadata;
 

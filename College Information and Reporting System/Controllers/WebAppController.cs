@@ -1,4 +1,5 @@
 ﻿using College_Information_and_Reporting_System.Data;
+using College_Information_and_Reporting_System.Models.ViewModels;
 using College_Information_and_Reporting_System.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +19,15 @@ namespace College_Information_and_Reporting_System.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var students = _studentService.getStudentDetails();
-            return View(students);
+            //var students = _studentService.getStudentDetails();
+            var model = new IndexViewModel
+            {
+                Students = _studentService.getStudents(),
+                StudentRisks = _studentService.getStudentRisks()
+            };
+
+            
+            return View(model);
         }
 
         //public IActionResult Index()

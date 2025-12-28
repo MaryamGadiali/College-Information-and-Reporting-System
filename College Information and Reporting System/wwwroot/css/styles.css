@@ -1,0 +1,15 @@
+﻿.navbar {
+    background-color: #1d70b8;
+    min-height: 6rem;
+    margin-bottom: 2rem;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.webTitle {
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
