@@ -1,9 +1,11 @@
 ﻿using College_Information_and_Reporting_System.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace College_Information_and_Reporting_System.Models.Domain
 {
     public class Student
     {
+        [Key]
         public int studentId { get; set; }
 
         public string studentFirstName { get; set; }

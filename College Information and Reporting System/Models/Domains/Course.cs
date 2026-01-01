@@ -1,7 +1,10 @@
-﻿namespace College_Information_and_Reporting_System.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace College_Information_and_Reporting_System.Models.Domain
 {
     public class Course
     {
+        [Key]
         public int courseId { get; set; }
         //public string courseCode { get; set; }
         public string courseName { get; set; }

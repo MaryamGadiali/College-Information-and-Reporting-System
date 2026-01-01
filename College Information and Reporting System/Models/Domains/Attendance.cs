@@ -1,9 +1,11 @@
 ﻿using College_Information_and_Reporting_System.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace College_Information_and_Reporting_System.Models.Domain
 {
     public class Attendance
     {
+        [Key]
         public int attendanceId { get; set; }
         public DateTime attendanceTime { get; set; }
         //public DateTime recordedAt { get; set; } may not be needed
