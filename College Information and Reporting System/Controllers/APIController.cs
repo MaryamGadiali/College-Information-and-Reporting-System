@@ -1,5 +1,7 @@
 ﻿using College_Information_and_Reporting_System.Data;
+using College_Information_and_Reporting_System.Enums;
 using College_Information_and_Reporting_System.Models.Domain;
+using College_Information_and_Reporting_System.Models.DTOs;
 using College_Information_and_Reporting_System.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
@@ -55,13 +57,48 @@ namespace College_Information_and_Reporting_System.Controllers
         }
 
         ////create new attendance record for student
-        //[HttpPost]
-        //public async Task<IActionResult> createAttendanceRecord([FromBody] Attendance attendance)
-        //{
+        [HttpPost]
+        public async Task<IActionResult> createAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
+        {
+            //check if enum is valid
+            var newAttendanceStatus= _studentService.isAttendanceStatusCheck(attendanceRecord.attendanceStatus);
+            if (newAttendanceStatus==null){
+                return BadRequest("Please enter a valid status");
+            }
+          
+                Attendance attendance = new Attendance
+                {
+                    attendanceTime = attendanceRecord.attendanceTime,
+                    attendanceStatus = (AttendanceStatus)newAttendanceStatus,
+                    student = _studentService.getStudentByIdAsync(attendanceRecord.studentId).Result,
+                    course = _studentService.getCourseByIdAsync(attendanceRecord.courseId).Result
+                };
 
-        //}
 
-       
+            //error handling
+            if (attendance.student == null)
+            {
+                return BadRequest("Please enter a valid student ID");
+            }
+            else if (attendance.course == null)
+            {
+                return BadRequest("Please enter a valid course ID");
+            }
+            else if (attendance.attendanceStatus == null)
+            {
+                return BadRequest("Please enter a valid status");
+            }
+            else if (!_studentService.IsStudentCourseMatch(attendance.student, attendance.course))
+            {
+                return BadRequest("Student is not enrolled in this course");
+            }
+
+            _studentService.AddAttendanceRecord(attendance);
+
+            return Ok(attendance);
+        }
+
+
 
     }
 }

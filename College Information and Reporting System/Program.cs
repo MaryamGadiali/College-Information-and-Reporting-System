@@ -3,6 +3,7 @@ using College_Information_and_Reporting_System.Data;
 using College_Information_and_Reporting_System.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System.Text.Json.Serialization;
 
 // dotnet ef migrations remove
 //dotnet ef migrations add InitialCreate
@@ -14,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Registers controllers
 //builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
+    //.AddJsonOptions(o=>o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); //for enum dropdowns
 builder.Services.AddScoped<IStudentService, StudentService>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -25,6 +27,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //seed data
 builder.Services.AddHostedService<DatabaseSeeder>();
+
+
 
 var app = builder.Build();
 

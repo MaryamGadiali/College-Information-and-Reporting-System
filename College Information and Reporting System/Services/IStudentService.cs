@@ -1,4 +1,5 @@
-﻿using College_Information_and_Reporting_System.Models.Domain;
+﻿using College_Information_and_Reporting_System.Enums;
+using College_Information_and_Reporting_System.Models.Domain;
 using College_Information_and_Reporting_System.Models.DTOs;
 
 namespace College_Information_and_Reporting_System.Services
@@ -9,5 +10,10 @@ namespace College_Information_and_Reporting_System.Services
 
         List<StudentRiskDTO> getStudentRisks();
         Task<Student> getStudentByIdAsync(int id);
+        Task<Course> getCourseByIdAsync(int courseId);
+        void AddAttendanceRecord(Attendance attendance);
+        bool IsStudentCourseMatch(Student student, Course course);
+        AttendanceStatus? isAttendanceStatusCheck(string attendanceStatus);
+        //AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus);
     }
 }
