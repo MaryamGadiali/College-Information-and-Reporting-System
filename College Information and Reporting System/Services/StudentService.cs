@@ -46,7 +46,7 @@ namespace College_Information_and_Reporting_System.Services
             _db.attendances.Add(attendance);
             await _db.SaveChangesAsync();
         }
-
+           
         public bool IsStudentCourseMatch(Student student, Course course)
         {
             if (student.courses.Any(c => c.courseId == course.courseId))
@@ -64,6 +64,19 @@ namespace College_Information_and_Reporting_System.Services
             }
             return null;
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<Course> getCourseByNameAsync(string oldCourseName)
+        {
+            return await _db.courses.FirstOrDefaultAsync(c => c.courseName == oldCourseName);
+        }
+
+
+
 
         //public AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus)
         //{

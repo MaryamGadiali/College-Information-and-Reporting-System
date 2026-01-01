@@ -14,12 +14,10 @@ namespace College_Information_and_Reporting_System.Controllers
     public class APIController : ControllerBase
     {
 
-        private readonly AppDbContext _db;
         private readonly IStudentService _studentService;
 
-        public APIController(AppDbContext db, IStudentService studentService) //remove db
+        public APIController(IStudentService studentService) 
         {
-            _db = db;
             _studentService = studentService; 
         }
 
@@ -30,12 +28,6 @@ namespace College_Information_and_Reporting_System.Controllers
             return "Hello World";
         }
 
-        [HttpGet("Welcome")]
-        public IEnumerable<string> Welcome([FromQuery] string? name = "Bob")
-        {
-            return _db.students.Select(s => s.studentFirstName).ToList();
-            //return HtmlEncoder.Default.Encode($"Hello {name}");
-        }
 
         [HttpGet("PathVar/{name}")]
         public string PathVar([FromRoute] string name)
@@ -43,7 +35,7 @@ namespace College_Information_and_Reporting_System.Controllers
             return $"Hello {name}";
         }
 
-        //Path variable example
+        //Path variable example - READ
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudentById([FromRoute] int id)
         {
@@ -56,9 +48,9 @@ namespace College_Information_and_Reporting_System.Controllers
             return Ok(student.studentFirstName);
         }
 
-        ////create new attendance record for student
+        //CREATE new attendance record for student
         [HttpPost]
-        public async Task<IActionResult> createAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
+        public async Task<IActionResult> CreateAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
         {
             //check if enum is valid
             var newAttendanceStatus= _studentService.isAttendanceStatusCheck(attendanceRecord.attendanceStatus);
@@ -98,7 +90,24 @@ namespace College_Information_and_Reporting_System.Controllers
             return Ok(attendance);
         }
 
+        ////UPDATE course name
+        [HttpPatch("{oldCourseName}")]
+        public async Task<IActionResult> UpdateCourseName([FromRoute] string oldCourseName, [FromBody] string newCourseName)
+        {
+            Console.WriteLine(oldCourseName);
+            Course course= await _studentService.getCourseByNameAsync(oldCourseName);
 
+            if (course == null)
+            {
+                return NotFound("Invalid course name");
+            }
+
+            course.courseName = newCourseName;
+            await _studentService.SaveChangesAsync();
+            return Ok(course);
+        }
+
+        //delete student
 
     }
 }
