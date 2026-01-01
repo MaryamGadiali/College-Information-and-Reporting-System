@@ -108,6 +108,17 @@ namespace College_Information_and_Reporting_System.Controllers
         }
 
         //delete student
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> deleteStudent([FromRoute] int id)
+        {
+            Student student = await _studentService.getStudentByIdAsync(id);
+            if (student == null)
+            {
+                return NotFound("Invalid student ID");
+            }
+            await _studentService.deleteStudentAsync(student);
+            return Ok("Successfully deleted");
+        }
 
     }
 }

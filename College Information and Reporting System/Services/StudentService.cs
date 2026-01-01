@@ -75,7 +75,12 @@ namespace College_Information_and_Reporting_System.Services
             return await _db.courses.FirstOrDefaultAsync(c => c.courseName == oldCourseName);
         }
 
+        public async Task deleteStudentAsync(Student student)
+        {
+             _db.students.Remove(student);
+            await _db.SaveChangesAsync();
 
+        }
 
 
         //public AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus)

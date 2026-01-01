@@ -16,6 +16,7 @@ namespace College_Information_and_Reporting_System.Services
         AttendanceStatus? isAttendanceStatusCheck(string attendanceStatus);
         Task SaveChangesAsync();
         Task<Course> getCourseByNameAsync(string oldCourseName);
+        Task deleteStudentAsync(Student student);
         //AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus);
     }
 }
