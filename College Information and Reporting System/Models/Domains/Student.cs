@@ -28,11 +28,5 @@ namespace College_Information_and_Reporting_System.Models.Domain
 
         public ICollection<Course> courses { get; set; } = new List<Course>();
 
-
-
-
-
-
-
     }
 }

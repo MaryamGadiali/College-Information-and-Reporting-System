@@ -41,13 +41,13 @@ namespace College_Information_and_Reporting_System.Services
             return await _db.courses.SingleOrDefaultAsync(c => c.courseId == courseId);
         }
 
-        public async void AddAttendanceRecord(Attendance attendance)
+        public async Task addAttendanceRecord(Attendance attendance)
         {
             _db.attendances.Add(attendance);
             await _db.SaveChangesAsync();
         }
            
-        public bool IsStudentCourseMatch(Student student, Course course)
+        public bool isStudentCourseMatch(Student student, Course course)
         {
             if (student.courses.Any(c => c.courseId == course.courseId))
             {

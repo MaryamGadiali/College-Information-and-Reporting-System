@@ -80,12 +80,12 @@ namespace College_Information_and_Reporting_System.Controllers
             {
                 return BadRequest("Please enter a valid status");
             }
-            else if (!_studentService.IsStudentCourseMatch(attendance.student, attendance.course))
+            else if (!_studentService.isStudentCourseMatch(attendance.student, attendance.course))
             {
                 return BadRequest("Student is not enrolled in this course");
             }
 
-            _studentService.AddAttendanceRecord(attendance);
+            _studentService.addAttendanceRecord(attendance);
 
             return Ok(attendance);
         }
