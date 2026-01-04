@@ -36,6 +36,17 @@ namespace College_Information_and_Reporting_System.Tests
             };
         }
 
+        private Course createValidCourse()
+        {
+            return new Course
+            {
+               courseName="Maths",
+               budget=2000,
+               isActive=true,
+               startYear= new DateOnly(2020, 9, 1)
+            };
+        }
+
 
         [Fact]
         public async Task GetStudentById_ReturnsStudent_WhenExists()
@@ -123,6 +134,52 @@ namespace College_Information_and_Reporting_System.Tests
             //Assert
             result.StatusCode.Should().Be(HttpStatusCode.NotFound);
             body.Should().Contain("Invalid student ID");
+
+        }
+
+
+
+        [Fact]
+        public async Task updateCourseName_ReturnsCourse_WhenValid()
+        {
+
+            //Arrange
+            Course course = createValidCourse();
+
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.courses.Add(course);
+                await db.SaveChangesAsync();
+            }
+
+            JsonContent jsonContent = JsonContent.Create("Mathematics");
+
+            //Act
+            var result = await _httpClient.PatchAsync($"/api/{course.courseName}",jsonContent);
+            var body = await result.Content.ReadAsStringAsync();
+
+            //Assert
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            body.Should().Contain("Mathematics");
+
+        }
+
+
+        [Fact]
+        public async Task updateCourseName_ReturnsNotFound_WhenNotExists()
+        {
+
+            //Arrange
+            JsonContent jsonContent = JsonContent.Create("Mathematics");
+
+            //Act
+            var result = await _httpClient.PatchAsync($"/api/-1", jsonContent);
+            var body = await result.Content.ReadAsStringAsync();
+
+            //Assert
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            body.Should().Contain("Invalid course name");
 
         }
 

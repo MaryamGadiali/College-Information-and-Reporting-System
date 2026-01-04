@@ -92,7 +92,7 @@ namespace College_Information_and_Reporting_System.Controllers
 
         ////UPDATE course name
         [HttpPatch("{oldCourseName}")]
-        public async Task<IActionResult> UpdateCourseName([FromRoute] string oldCourseName, [FromBody] string newCourseName)
+        public async Task<IActionResult> updateCourseName([FromRoute] string oldCourseName, [FromBody] string newCourseName)
         {
             Console.WriteLine(oldCourseName);
             Course course= await _studentService.getCourseByNameAsync(oldCourseName);
