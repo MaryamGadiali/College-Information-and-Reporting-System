@@ -45,7 +45,7 @@ namespace College_Information_and_Reporting_System.Controllers
             {
                 return NotFound("Invalid student ID");
             }
-            return Ok(student.studentFirstName);
+            return Ok(student);
         }
 
         //CREATE new attendance record for student
