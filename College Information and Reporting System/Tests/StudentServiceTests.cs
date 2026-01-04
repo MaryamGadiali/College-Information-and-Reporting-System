@@ -128,11 +128,6 @@ namespace College_Information_and_Reporting_System.Tests
         {
             //Arrange
             var db = CreateDb();
-            //Student student = createValidStudent();
-
-            //db.students.Add(student);
-            //await db.SaveChangesAsync();
-
             StudentService studentService = new StudentService(db);
 
             //Act 
