@@ -23,7 +23,7 @@ namespace College_Information_and_Reporting_System.Tests
         {
             return new Student
             {
-                studentId = 1,
+          
                 studentFirstName = "Mary",
                 studentLastName = "Smith",
                 studentGender = Gender.Female,
@@ -31,6 +31,17 @@ namespace College_Information_and_Reporting_System.Tests
                 studentStartDate = new DateOnly(2020, 9, 1),
                 status = StudentStatus.Active,
                 createdAt = DateTime.UtcNow
+            };
+        }
+
+        private Course createValidCourse()
+        {
+            return new Course
+            {
+                courseName = "Maths",
+                budget = 2000,
+                isActive = true,
+                startYear = new DateOnly(2020, 9, 1)
             };
         }
 
@@ -64,19 +75,25 @@ namespace College_Information_and_Reporting_System.Tests
         }
 
         [Fact]
-        public void isStudentCourseMatch_ReturnsTrue_WhenMatches()
+        public async Task isStudentCourseMatch_ReturnsTrue_WhenMatches()
         {
             //Arrange
-            StudentService studentService = new StudentService(null); //Doesn't need db acion
+            var db = CreateDb();
+            
 
-            Course course = new Course();
-            course.courseId = 1;
-
-            Student student = new Student();
+            Course course = createValidCourse();
+            Student student = createValidStudent();
             student.courses.Add(course);
 
+            db.students.Add(student);
+            await db.SaveChangesAsync();
+            db.courses.Add(course);
+            await db.SaveChangesAsync();
+
+            StudentService studentService = new StudentService(db);
+
             //Act 
-            var result = studentService.isStudentCourseMatch(student,course);
+            var result = await studentService.isStudentCourseMatchAsync(student.studentId,course.courseId);
 
             //Assert
             result.Should().BeTrue();
@@ -84,18 +101,15 @@ namespace College_Information_and_Reporting_System.Tests
         }
 
         [Fact]
-        public void isStudentCourseMatch_ReturnsFalse_WhenNoMatches()
+        public async Task isStudentCourseMatch_ReturnsFalse_WhenNoMatches()
         {
             //Arrange
-            StudentService studentService = new StudentService(null); //Doesn't need db acion
+            var db = CreateDb();
+            StudentService studentService = new StudentService(db);
 
-            Course course = new Course();
-            course.courseId = 1;
-
-            Student student = new Student();
 
             //Act 
-            var result = studentService.isStudentCourseMatch(student, course);
+            var result = await studentService.isStudentCourseMatchAsync(0,-1);
 
             //Assert
             result.Should().BeFalse();
@@ -115,7 +129,7 @@ namespace College_Information_and_Reporting_System.Tests
             StudentService studentService = new StudentService(db);
 
             //Act 
-            var result = await studentService.getStudentByIdAsync(1);
+            var result = await studentService.getStudentByIdAsync(student.studentId);
 
             //Assert
             result.Should().NotBeNull();
@@ -131,7 +145,7 @@ namespace College_Information_and_Reporting_System.Tests
             StudentService studentService = new StudentService(db);
 
             //Act 
-            var result = await studentService.getStudentByIdAsync(1);
+            var result = await studentService.getStudentByIdAsync(-1);
 
             //Assert
             result.Should().BeNull();

@@ -47,13 +47,10 @@ namespace College_Information_and_Reporting_System.Services
             await _db.SaveChangesAsync();
         }
            
-        public bool isStudentCourseMatch(Student student, Course course)
+        public async Task<bool> isStudentCourseMatchAsync(int studentId, int courseId)
         {
-            if (student.courses.Any(c => c.courseId == course.courseId))
-            {
-                return true;
-            }
-            return false;
+            return await _db.students.AnyAsync(s=>s.studentId==studentId && s.courses.Any(c=>c.courseId==courseId));
+          
         }
 
         public AttendanceStatus? isAttendanceStatusCheck(string attendanceStatus)

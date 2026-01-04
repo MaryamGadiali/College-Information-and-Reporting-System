@@ -2,10 +2,13 @@
 using College_Information_and_Reporting_System.Data;
 using College_Information_and_Reporting_System.Enums;
 using College_Information_and_Reporting_System.Models.Domain;
+using College_Information_and_Reporting_System.Models.DTOs;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 using System.Net;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace College_Information_and_Reporting_System.Tests
 {
@@ -14,10 +17,13 @@ namespace College_Information_and_Reporting_System.Tests
 
         private readonly HttpClient _httpClient;
         private readonly TestWebApplicationFactory _factory;
+        private readonly ITestOutputHelper _logging;
 
-        public ApiIntegrationTests(TestWebApplicationFactory factory) {
+        public ApiIntegrationTests(TestWebApplicationFactory factory, ITestOutputHelper logging) {
             _factory = factory;
             _httpClient = factory.CreateClient();
+            _logging = logging;
+
 
         }
 
@@ -44,6 +50,17 @@ namespace College_Information_and_Reporting_System.Tests
                budget=2000,
                isActive=true,
                startYear= new DateOnly(2020, 9, 1)
+            };
+        }
+
+        private AttendanceCreateDTO createValidAttendanceDTO(Student student, Course course)
+        {
+            return new AttendanceCreateDTO
+            {
+                attendanceStatus = "Present",
+                studentId = student.studentId,
+                courseId = course.courseId,
+                attendanceTime =  DateTime.Now
             };
         }
 
@@ -180,6 +197,50 @@ namespace College_Information_and_Reporting_System.Tests
             //Assert
             result.StatusCode.Should().Be(HttpStatusCode.NotFound);
             body.Should().Contain("Invalid course name");
+
+        }
+
+
+
+
+
+
+        [Fact]
+        public async Task createAttendanceRecord_ReturnsAttendance_WhenValid()
+        {
+
+            //Arrange
+            Student student = createValidStudent();
+            Course course = createValidCourse();
+
+
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.courses.Add(course);
+                student.courses.Add(course);
+                db.students.Add(student);
+
+                _logging.WriteLine(student.courses.FirstOrDefault().courseId.ToString());
+                _logging.WriteLine(course.courseId.ToString());
+                await db.SaveChangesAsync();
+            }
+
+            AttendanceCreateDTO attendanceRecord = createValidAttendanceDTO(student, course);
+
+            JsonContent jsonContent = JsonContent.Create(attendanceRecord);
+
+            //Act
+            var result = await _httpClient.PostAsync($"/api/", jsonContent);
+            var body = await result.Content.ReadAsStringAsync();
+
+            _logging.WriteLine($"Status: {result.StatusCode}");
+            _logging.WriteLine(body);
+
+            //Assert
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            body.Should().Contain(student.studentId.ToString());
+            body.Should().Contain(course.courseId.ToString());
 
         }
 

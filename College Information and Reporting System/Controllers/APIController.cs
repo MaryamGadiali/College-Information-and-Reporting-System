@@ -50,7 +50,7 @@ namespace College_Information_and_Reporting_System.Controllers
 
         //CREATE new attendance record for student
         [HttpPost]
-        public async Task<IActionResult> CreateAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
+        public async Task<IActionResult> createAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
         {
             //check if enum is valid
             var newAttendanceStatus= _studentService.isAttendanceStatusCheck(attendanceRecord.attendanceStatus);
@@ -62,8 +62,8 @@ namespace College_Information_and_Reporting_System.Controllers
                 {
                     attendanceTime = attendanceRecord.attendanceTime,
                     attendanceStatus = (AttendanceStatus)newAttendanceStatus,
-                    student = _studentService.getStudentByIdAsync(attendanceRecord.studentId).Result,
-                    course = _studentService.getCourseByIdAsync(attendanceRecord.courseId).Result
+                    student = await _studentService.getStudentByIdAsync(attendanceRecord.studentId),
+                    course = await _studentService.getCourseByIdAsync(attendanceRecord.courseId)
                 };
 
 
@@ -80,7 +80,7 @@ namespace College_Information_and_Reporting_System.Controllers
             {
                 return BadRequest("Please enter a valid status");
             }
-            else if (!_studentService.isStudentCourseMatch(attendance.student, attendance.course))
+            else if (!await _studentService.isStudentCourseMatchAsync(attendance.student.studentId, attendance.course.courseId))
             {
                 return BadRequest("Student is not enrolled in this course");
             }

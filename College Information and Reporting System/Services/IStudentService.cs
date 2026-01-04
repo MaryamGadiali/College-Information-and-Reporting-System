@@ -12,7 +12,7 @@ namespace College_Information_and_Reporting_System.Services
         Task<Student> getStudentByIdAsync(int id);
         Task<Course> getCourseByIdAsync(int courseId);
         Task addAttendanceRecord(Attendance attendance);
-        bool isStudentCourseMatch(Student student, Course course);
+        Task<bool> isStudentCourseMatchAsync(int studentId, int courseId);
         AttendanceStatus? isAttendanceStatusCheck(string attendanceStatus);
         Task SaveChangesAsync();
         Task<Course> getCourseByNameAsync(string oldCourseName);
