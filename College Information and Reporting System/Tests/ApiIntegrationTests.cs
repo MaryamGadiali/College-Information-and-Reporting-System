@@ -80,5 +80,51 @@ namespace College_Information_and_Reporting_System.Tests
 
         }
 
+
+
+
+
+
+        [Fact]
+        public async Task deleteStudentById_ReturnsOK_WhenDeleted()
+        {
+
+            //Arrange
+            Student student = createValidStudent();
+
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.students.Add(student);
+                await db.SaveChangesAsync();
+            }
+
+            //Act
+            var result = await _httpClient.DeleteAsync($"/api/{student.studentId}");
+            var body = await result.Content.ReadAsStringAsync();
+
+            //Assert
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            body.Should().Contain("Successfully deleted");
+
+        }
+
+
+        [Fact]
+        public async Task deleteStudentById_ReturnsNotFound_WhenNotExists()
+        {
+
+            //Arrange
+            
+            //Act
+            var result = await _httpClient.DeleteAsync($"/api/-1");
+            var body = await result.Content.ReadAsStringAsync();
+
+            //Assert
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            body.Should().Contain("Invalid student ID");
+
+        }
+
     }
 }

@@ -109,7 +109,7 @@ namespace College_Information_and_Reporting_System.Controllers
 
         //delete student
         [HttpDelete("{id}")]
-        public async Task<IActionResult> deleteStudent([FromRoute] int id)
+        public async Task<IActionResult> deleteStudentById([FromRoute] int id)
         {
             Student student = await _studentService.getStudentByIdAsync(id);
             if (student == null)
