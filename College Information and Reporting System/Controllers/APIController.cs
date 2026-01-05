@@ -40,7 +40,7 @@ namespace College_Information_and_Reporting_System.Controllers
             return Ok(student);
         }
 
-        [[SwaggerOperation(
+        [SwaggerOperation(
             Summary = "Create attendance record",
             Description = "Creates a new attendance record for a student in a course. Validates student, course, and attendance status."
         )]
@@ -49,7 +49,7 @@ namespace College_Information_and_Reporting_System.Controllers
         [HttpPost]
         public async Task<IActionResult> createAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
         {
-            //check if enum is valid
+            //Checks if enum is valid
             var newAttendanceStatus= _studentService.isAttendanceStatusCheck(attendanceRecord.attendanceStatus);
             if (newAttendanceStatus==null){
                 return BadRequest("Please enter a valid status");
@@ -64,7 +64,7 @@ namespace College_Information_and_Reporting_System.Controllers
                 };
 
 
-            //error handling
+            //Error handling
             if (attendance.student == null)
             {
                 return BadRequest("Please enter a valid student ID");
@@ -82,7 +82,7 @@ namespace College_Information_and_Reporting_System.Controllers
                 return BadRequest("Student is not enrolled in this course");
             }
 
-            _studentService.addAttendanceRecord(attendance);
+            await _studentService.addAttendanceRecord(attendance);
 
             return Ok(attendance);
         }
