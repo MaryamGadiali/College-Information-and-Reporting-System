@@ -3,6 +3,7 @@ using College_Information_and_Reporting_System.Data;
 using College_Information_and_Reporting_System.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.OpenApi;
 using System.Text.Json.Serialization;
 
 // dotnet ef migrations remove
@@ -19,7 +20,16 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IStudentService, StudentService>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.EnableAnnotations();
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "College Information and Reporting System API",
+        Version = "v1",
+        Description = "API for managing students, courses, departments, and attendance"
+    });
+});
 
 // Configure EF Core
 builder.Services.AddDbContext<AppDbContext>(options =>

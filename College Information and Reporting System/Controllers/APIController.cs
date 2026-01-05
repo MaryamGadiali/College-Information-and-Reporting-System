@@ -4,6 +4,7 @@ using College_Information_and_Reporting_System.Models.Domain;
 using College_Information_and_Reporting_System.Models.DTOs;
 using College_Information_and_Reporting_System.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Encodings.Web;
 
 namespace College_Information_and_Reporting_System.Controllers
@@ -21,21 +22,13 @@ namespace College_Information_and_Reporting_System.Controllers
             _studentService = studentService; 
         }
 
-        [HttpGet("Hello")]
-        public string Hello()
-        {
-            Console.WriteLine("Hello world");
-            return "Hello World";
-        }
 
-
-        [HttpGet("PathVar/{name}")]
-        public string PathVar([FromRoute] string name)
-        {
-            return $"Hello {name}";
-        }
-
-        //Path variable example - READ
+        [SwaggerOperation(
+            Summary = "Get student by ID",
+            Description = "Returns a student if the ID exists."
+        )]
+        [SwaggerResponse(200, "Student found", typeof(Student))]
+        [SwaggerResponse(404, "Student not found")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudentById([FromRoute] int id)
         {
