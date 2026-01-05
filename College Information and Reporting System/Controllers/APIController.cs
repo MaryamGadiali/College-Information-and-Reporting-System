@@ -32,7 +32,6 @@ namespace College_Information_and_Reporting_System.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudentById([FromRoute] int id)
         {
-            Console.WriteLine(id);
             Student student = await _studentService.getStudentByIdAsync(id);
             if (student == null)
             {
@@ -41,7 +40,12 @@ namespace College_Information_and_Reporting_System.Controllers
             return Ok(student);
         }
 
-        //CREATE new attendance record for student
+        [[SwaggerOperation(
+            Summary = "Create attendance record",
+            Description = "Creates a new attendance record for a student in a course. Validates student, course, and attendance status."
+        )]
+        [SwaggerResponse(200, "Attendance successfully created", typeof(Attendance))]
+        [SwaggerResponse(400, "Invalid student ID, course ID, or attendance status, or student not enrolled in the course")]
         [HttpPost]
         public async Task<IActionResult> createAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
         {
@@ -83,11 +87,15 @@ namespace College_Information_and_Reporting_System.Controllers
             return Ok(attendance);
         }
 
-        ////UPDATE course name
+        [SwaggerOperation(
+            Summary = "Update course name",
+            Description = "Updates course name if old course name matches an existing course"
+        )]
+        [SwaggerResponse(200, "Course name successfully updated", typeof(Course))]
+        [SwaggerResponse(404, "Course not found ")]
         [HttpPatch("{oldCourseName}")]
         public async Task<IActionResult> updateCourseName([FromRoute] string oldCourseName, [FromBody] string newCourseName)
         {
-            Console.WriteLine(oldCourseName);
             Course course= await _studentService.getCourseByNameAsync(oldCourseName);
 
             if (course == null)
@@ -100,7 +108,12 @@ namespace College_Information_and_Reporting_System.Controllers
             return Ok(course);
         }
 
-        //delete student
+        [SwaggerOperation(
+            Summary = "Delete student by ID",
+            Description = "Deletes student if the ID exists"
+        )]
+        [SwaggerResponse(200, "Student successfully deleted")]
+        [SwaggerResponse(404, "Student not found")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteStudentById([FromRoute] int id)
         {
