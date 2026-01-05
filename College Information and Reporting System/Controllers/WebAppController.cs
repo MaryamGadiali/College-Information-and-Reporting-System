@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace College_Information_and_Reporting_System.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class WebAppController : Controller
     {
 
@@ -26,15 +27,10 @@ namespace College_Information_and_Reporting_System.Controllers
                 StudentRisks = _studentService.getStudentRisks()
             };
 
-            
             return View(model);
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
+      
 
     }
 }
