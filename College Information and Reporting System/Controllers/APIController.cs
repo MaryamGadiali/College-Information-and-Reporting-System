@@ -29,7 +29,7 @@ namespace College_Information_and_Reporting_System.Controllers
         )]
         [SwaggerResponse(200, "Student found", typeof(Student))]
         [SwaggerResponse(404, "Student not found")]
-        [HttpGet("{id}")]
+        [HttpGet("student/{id}")]
         public async Task<IActionResult> GetStudentById([FromRoute] int id)
         {
             Student student = await _studentService.getStudentByIdAsync(id);
@@ -46,7 +46,7 @@ namespace College_Information_and_Reporting_System.Controllers
         )]
         [SwaggerResponse(200, "Attendance successfully created", typeof(Attendance))]
         [SwaggerResponse(400, "Invalid student ID, course ID, or attendance status, or student not enrolled in the course")]
-        [HttpPost]
+        [HttpPost("attendance/")]
         public async Task<IActionResult> createAttendanceRecord([FromBody] AttendanceCreateDTO attendanceRecord)
         {
             //Checks if enum is valid
@@ -93,7 +93,7 @@ namespace College_Information_and_Reporting_System.Controllers
         )]
         [SwaggerResponse(200, "Course name successfully updated", typeof(Course))]
         [SwaggerResponse(404, "Course not found ")]
-        [HttpPatch("{oldCourseName}")]
+        [HttpPatch("course/{oldCourseName}")]
         public async Task<IActionResult> updateCourseName([FromRoute] string oldCourseName, [FromBody] string newCourseName)
         {
             Course course= await _studentService.getCourseByNameAsync(oldCourseName);
@@ -114,7 +114,7 @@ namespace College_Information_and_Reporting_System.Controllers
         )]
         [SwaggerResponse(200, "Student successfully deleted")]
         [SwaggerResponse(404, "Student not found")]
-        [HttpDelete("{id}")]
+        [HttpDelete("student/{id}")]
         public async Task<IActionResult> deleteStudentById([FromRoute] int id)
         {
             Student student = await _studentService.getStudentByIdAsync(id);
