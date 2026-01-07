@@ -79,6 +79,13 @@ namespace College_Information_and_Reporting_System.Services
 
         }
 
+        public async Task<List<Attendance>> getAttendanceForStudentId(string studentId)
+        {
+            return await _db.attendances
+                .Include(a=>a.student)
+                .Where(s=>s.student.studentId.ToString() == studentId).ToListAsync();
+        }
+
 
         //public AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus)
         //{

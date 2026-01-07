@@ -1,6 +1,7 @@
 ﻿@using College_Information_and_Reporting_System.Models
+@using College_Information_and_Reporting_System.Models.Domain
 @using College_Information_and_Reporting_System.Models.ViewModels
-@model IndexViewModel
+@model List<Attendance>
 
 <!DOCTYPE HTML>
 <html>
@@ -12,7 +13,7 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/styles.css" />
 
-    <title>Demo page</title>
+    <title>Attendance page</title>
 </head>
 
 <body>
@@ -22,11 +23,16 @@
         <h3 class="webTitle ms-4">School System</h3>
     </nav>
 
-@foreach (var student in Model.Students)
-{
-        <p>@student.studentFirstName</p>
+    @* <p>@Model.attendanceStatus</p> *@
 
-        var risk = Model.StudentRisks.FirstOrDefault(risk => risk.studentId == student.studentId);
+    @foreach (var record in Model)
+    {
+        <p>@record.student.studentFirstName</p>
+        <p>@record.student.studentLastName</p>
+        <p>@record.attendanceStatus</p>
+        <p>@record.attendanceTime</p>
+
+        @* var risk = Model.StudentRisks.FirstOrDefault(risk => risk.studentId == student.studentId);
 
         <div class="container card col-lg-6 col-sm-12 shadow-sm mt-3 mb-3 p-0">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -34,16 +40,16 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title ">@student.studentFirstName = @risk.riskStatus</h5>
-               
+
             </div>
 
             <button class=" themeButton col-4 btn d-flex align-items-center justify-content-around"
                     onclick="window.location.href='/students/@student.studentId/attendance'">
                 <span>View attendance records</span>
             </button>
-        </div>
-   
-  }
+        </div> *@
+
+     } 
 
 </body>
 

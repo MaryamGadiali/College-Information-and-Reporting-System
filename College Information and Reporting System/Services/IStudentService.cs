@@ -17,6 +17,7 @@ namespace College_Information_and_Reporting_System.Services
         Task SaveChangesAsync();
         Task<Course> getCourseByNameAsync(string oldCourseName);
         Task deleteStudentAsync(Student student);
+        Task<List<Attendance>> getAttendanceForStudentId(string studentId);
         //AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus);
     }
 }
