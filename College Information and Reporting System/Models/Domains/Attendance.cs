@@ -11,6 +11,6 @@ namespace College_Information_and_Reporting_System.Models.Domain
         public AttendanceStatus attendanceStatus {  get; set; }
         public required Student student { get; set; }
         public required Course course { get; set; }
-        //public DateTime recordedAt { get; set; } may not be needed
+        //public DateTime recordedAt { get; set; } could be used in future
     }
 }

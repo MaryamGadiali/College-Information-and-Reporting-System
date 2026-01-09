@@ -85,17 +85,8 @@ namespace College_Information_and_Reporting_System.Services
         {
             return await _db.attendances
                 .Include(a=>a.student)
+                .Include(c=>c.course)
                 .Where(s=>s.student.studentId.ToString() == studentId).ToListAsync();
         }
-
-
-        //public AttendanceStatus attendanceStatusEnumTransform(string attendanceStatus)
-        //{
-        //    if (Enum.TryParse<AttendanceStatus>(attendanceStatus, out var status))
-        //    {
-        //        return status;
-        //    }
-        //    throw new ArgumentException("Incorrect status");
-        //}
     }
 }

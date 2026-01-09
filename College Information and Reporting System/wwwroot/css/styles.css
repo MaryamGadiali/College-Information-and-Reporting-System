@@ -9,10 +9,16 @@
     color:white;
 }
 
-    .themeBtn:hover {
-        background-color: white !important;
-        color: #1d70b8;
-    }
+.themeBtn:hover {
+    background-color: white !important;
+    color: #1d70b8;
+}
+
+.themeButtonInvert {
+    background-color: white !important;
+    color: #1d70b8;
+    border-color: #b1b4b6;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;

@@ -1,6 +1,9 @@
-﻿@using College_Information_and_Reporting_System.Models
+﻿@using College_Information_and_Reporting_System.Enums
+@using College_Information_and_Reporting_System.Models
 @using College_Information_and_Reporting_System.Models.Domain
 @using College_Information_and_Reporting_System.Models.ViewModels
+@using System.Linq
+
 @model List<Attendance>
 
 <!DOCTYPE HTML>
@@ -21,36 +24,55 @@
     <!-- Web header -->
     <nav class="navbar">
         <h3 class="webTitle ms-4">School System</h3>
+        <div class="w-100"></div>
+        <div class="row">
+            <button id="back" class=" btn btn-sm themeButtonInvert ms-4" onclick="window.location.href='/home'">
+                <div class="row g-1 align-items-center">
+                    <div class="col">
+                        Back
+                    </div>
+                </div>
+            </button>
+        </div>
     </nav>
 
-    @* <p>@Model.attendanceStatus</p> *@
+    @{
+        var firstRecord = Model.FirstOrDefault();
+    }
+    @if (firstRecord != null)
+    {
+        <h2 class="text-center">@firstRecord.student.studentFirstName @firstRecord.student.studentLastName records</h2>
+    }
+    else
+    {
+        <h2>No records available</h2>
+    }
+
+    @{
+    var presentCount = Model.Count(r => r.attendanceStatus == AttendanceStatus.Present);
+    var absentCount  = Model.Count(r => r.attendanceStatus == AttendanceStatus.Absent);
+    var lateCount    = Model.Count(r => r.attendanceStatus == AttendanceStatus.Late);
+    }
+
+     <div class="container card col-lg-6 col-sm-12 shadow-sm mt-3 mb-3 p-2">
+
+    <div class="m-2 text-center">
+    <span class="badge bg-success">Present: @presentCount</span>
+    <span class="badge bg-danger">Absent: @absentCount</span>
+    <span class="badge bg-warning text-dark">Late: @lateCount</span>
+    </div>
+
 
     @foreach (var record in Model)
     {
-        <p>@record.student.studentFirstName</p>
-        <p>@record.student.studentLastName</p>
-        <p>@record.attendanceStatus</p>
-        <p>@record.attendanceTime</p>
-
-        @* var risk = Model.StudentRisks.FirstOrDefault(risk => risk.studentId == student.studentId);
-
-        <div class="container card col-lg-6 col-sm-12 shadow-sm mt-3 mb-3 p-0">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>@student.studentFirstName</div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title ">@student.studentFirstName = @risk.riskStatus</h5>
-
-            </div>
-
-            <button class=" themeButton col-4 btn d-flex align-items-center justify-content-around"
-                    onclick="window.location.href='/students/@student.studentId/attendance'">
-                <span>View attendance records</span>
-            </button>
-        </div> *@
-
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item flex-fill">@record.attendanceStatus</li>
+          <li class="list-group-item flex-fill">@record.attendanceTime.ToString("yyyy-MM-dd HH:mm")</li>
+          <li class="list-group-item flex-fill">@record.course.courseName</li>
+        </ul>
      } 
 
+     </div>
 </body>
 
 </html>
