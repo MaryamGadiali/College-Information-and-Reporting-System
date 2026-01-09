@@ -11,8 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/styles.css" />
-
-    <title>Demo page</title>
+    <title>Students page</title>
 </head>
 
 <body>
@@ -22,29 +21,49 @@
         <h3 class="webTitle ms-4">School System</h3>
     </nav>
 
-@foreach (var student in Model.Students)
-{
-        <p>@student.studentFirstName</p>
-
+    @foreach (var student in Model.Students)
+    {
         var risk = Model.StudentRisks.FirstOrDefault(risk => risk.studentId == student.studentId);
 
         <div class="container card col-lg-6 col-sm-12 shadow-sm mt-3 mb-3 p-0">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>@student.studentFirstName</div>
+            <div class="card-header d-flex justify-content-between align-items-center ">
+                <div>@risk.attendanceAvg%</div>
+                <div>@risk.riskStatus</div>
+            </div> 
+            <div class="card-body  d-flex align-items-start justify-content-around">
+                <h5 class="card-title ">@student.studentFirstName @student.studentLastName</h5>
+                <button type="button" class=" btn btn-primary themeBtn" onclick="window.location.href='/students/@student.studentId/attendance'">View attendance</button>
             </div>
-            <div class="card-body">
-                <h5 class="card-title ">@student.studentFirstName = @risk.riskStatus</h5>
-               
-            </div>
+           
+            <div class="container-fluid p-0 ">
+                <div class="accordion " id="accordionExample">
+                    <div class="accordion-item  " style="width:50%; text-align:left;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="changeText(this)">
+                            Courses
+                            </button>
+                        </h2>
 
-            <button class=" themeButton col-4 btn d-flex align-items-center justify-content-around"
-                    onclick="window.location.href='/students/@student.studentId/attendance'">
-                <span>View attendance records</span>
-            </button>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                            @foreach (var course in @student.courses){
+                                <p>@course.courseName</p>
+                            }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-   
   }
 
+<script>
+    function changeText(currentObject){
+        currentObject.textContent=currentObject.classList.contains('collapsed') 
+        ? "See Courses"
+        : "Hide Courses"
+    }
+</script>
 </body>
 
 </html>

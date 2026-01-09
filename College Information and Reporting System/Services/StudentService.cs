@@ -21,7 +21,9 @@ namespace College_Information_and_Reporting_System.Services
 
         public List<Student> getStudents()
         {
-            return _db.students.ToList();
+            return _db.students
+                .Include(s => s.courses)
+                .ToList();
         }
 
         public List<StudentRiskDTO> getStudentRisks()
