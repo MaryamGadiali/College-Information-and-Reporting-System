@@ -82,7 +82,7 @@ namespace College_Information_and_Reporting_System.Tests
 
 
             //Act
-            var result = await _httpClient.GetAsync($"/api/{student.studentId}");
+            var result = await _httpClient.GetAsync($"/api/student/{student.studentId}");
             var body = await result.Content.ReadAsStringAsync();
 
             //Assert
@@ -99,7 +99,7 @@ namespace College_Information_and_Reporting_System.Tests
             //Arrange
 
             //Act
-            var result = await _httpClient.GetAsync($"/api/-1");
+            var result = await _httpClient.GetAsync($"/api/student/-1");
             var body = await result.Content.ReadAsStringAsync();
 
             //Assert
@@ -128,7 +128,7 @@ namespace College_Information_and_Reporting_System.Tests
             }
 
             //Act
-            var result = await _httpClient.DeleteAsync($"/api/{student.studentId}");
+            var result = await _httpClient.DeleteAsync($"/api/student/{student.studentId}");
             var body = await result.Content.ReadAsStringAsync();
 
             //Assert
@@ -145,7 +145,7 @@ namespace College_Information_and_Reporting_System.Tests
             //Arrange
             
             //Act
-            var result = await _httpClient.DeleteAsync($"/api/-1");
+            var result = await _httpClient.DeleteAsync($"/api/student/-1");
             var body = await result.Content.ReadAsStringAsync();
 
             //Assert
@@ -173,7 +173,7 @@ namespace College_Information_and_Reporting_System.Tests
             JsonContent jsonContent = JsonContent.Create("Mathematics");
 
             //Act
-            var result = await _httpClient.PatchAsync($"/api/{course.courseName}",jsonContent);
+            var result = await _httpClient.PatchAsync($"/api/course/{course.courseName}",jsonContent);
             var body = await result.Content.ReadAsStringAsync();
 
             //Assert
@@ -191,7 +191,7 @@ namespace College_Information_and_Reporting_System.Tests
             JsonContent jsonContent = JsonContent.Create("Mathematics");
 
             //Act
-            var result = await _httpClient.PatchAsync($"/api/-1", jsonContent);
+            var result = await _httpClient.PatchAsync($"/api/course/-1", jsonContent);
             var body = await result.Content.ReadAsStringAsync();
 
             //Assert
@@ -231,7 +231,7 @@ namespace College_Information_and_Reporting_System.Tests
             JsonContent jsonContent = JsonContent.Create(attendanceRecord);
 
             //Act
-            var result = await _httpClient.PostAsync($"/api/", jsonContent);
+            var result = await _httpClient.PostAsync($"/api/attendance/", jsonContent);
             var body = await result.Content.ReadAsStringAsync();
 
             _logging.WriteLine($"Status: {result.StatusCode}");
