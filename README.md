@@ -5,6 +5,8 @@ This is an end-to-end demonstration project designed to reflect how schools can 
 It includes an API, a user friendly front end, PowerBI dashboard and SQL Sprocs/views/functions.
 It is developed using ASP.NET in an MVC style.
 
+You can see photos of the api, website and PowerBI dashboard by starting in the repository home page, and navigating to College Information and Reporting System folder and seeing the Application Photos folder and the PowerBI photos folder with images inside each one.
+
 # Set up and running the project
 1. Open SSMS and create a database called CIRS.
 2. Download the project, unzip it, and open in VS2022.
