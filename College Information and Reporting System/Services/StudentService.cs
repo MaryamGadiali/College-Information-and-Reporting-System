@@ -33,8 +33,6 @@ namespace College_Information_and_Reporting_System.Services
 
         public async Task<Student> getStudentByIdAsync(int id)
         {
-            //Student foundStudent = (Student)_db.students.Where(s => s.studentId == id);
-            //Console.WriteLine(foundStudent.studentLastName);
             return await _db.students.SingleOrDefaultAsync(s=>s.studentId==id);
         }
 
@@ -49,12 +47,14 @@ namespace College_Information_and_Reporting_System.Services
             await _db.SaveChangesAsync();
         }
            
+        //Checks if the student is enrolled on the course
         public async Task<bool> isStudentCourseMatchAsync(int studentId, int courseId)
         {
             return await _db.students.AnyAsync(s=>s.studentId==studentId && s.courses.Any(c=>c.courseId==courseId));
           
         }
 
+        //Checks if the attendance status field is a valid value matching the pre existing enums
         public AttendanceStatus? isAttendanceStatusCheck(string attendanceStatus)
         {
             if (Enum.TryParse<AttendanceStatus>(attendanceStatus, out var status))

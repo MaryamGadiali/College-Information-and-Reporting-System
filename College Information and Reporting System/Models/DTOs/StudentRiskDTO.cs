@@ -2,7 +2,8 @@
 
 namespace College_Information_and_Reporting_System.Models.DTOs
 {
-    //maps to vw_atriskstudents
+    //Object class that maps to vw_atriskstudents
+    //Used for the home page
     public class StudentRiskDTO
     {
         public int studentId { get; set; }
