@@ -87,8 +87,6 @@ namespace College_Information_and_Reporting_System.Tests
 
             db.students.Add(student);
             await db.SaveChangesAsync();
-            db.courses.Add(course);
-            await db.SaveChangesAsync();
 
             StudentService studentService = new StudentService(db);
 
