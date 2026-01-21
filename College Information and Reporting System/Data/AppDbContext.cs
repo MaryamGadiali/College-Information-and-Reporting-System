@@ -1,9 +1,10 @@
 ﻿using College_Information_and_Reporting_System.Models.Domain;
 using College_Information_and_Reporting_System.Models.DTOs;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace College_Information_and_Reporting_System.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -22,6 +23,7 @@ namespace College_Information_and_Reporting_System.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<StudentRiskDTO>()
                 .HasNoKey()
                 .ToView("vw_atriskstudents");
