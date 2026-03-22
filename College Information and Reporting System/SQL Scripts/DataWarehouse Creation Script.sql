@@ -6,7 +6,7 @@ use cirsdw;
 --DimDate creation
 CREATE TABLE DimDate (
     DateKey INT PRIMARY KEY, --YYYYMMDD format
-    FullDate DATE NOT NULL,
+    FullDate DATETIME2 NOT NULL,
     Year INT,
     Month INT,
     MonthName VARCHAR(20),
@@ -16,8 +16,8 @@ CREATE TABLE DimDate (
 
 
 --DimDate insertions from 2020 to 2030
-DECLARE @StartDate DATE = '2020-01-01'
-DECLARE @EndDate DATE = '2030-12-31'
+DECLARE @StartDate DATETIME2 = '2020-01-01'
+DECLARE @EndDate DATETIME2 = '2030-12-31'
 
 WHILE @StartDate <= @EndDate
 BEGIN
