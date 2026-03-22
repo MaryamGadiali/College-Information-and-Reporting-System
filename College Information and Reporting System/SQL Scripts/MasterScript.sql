@@ -208,7 +208,6 @@ FROM dbo.fn_GetStudentAttendanceRisk(
 );
 
 --Kimball Data Warehouse creation script
-
 create database CIRSDW;
 
 use cirsdw;
@@ -265,8 +264,8 @@ CREATE TABLE DimStudent (
 CREATE TABLE DimCourse (
     CourseKey INT IDENTITY(1,1) PRIMARY KEY,
     CourseID INT,           
-    CourseName VARCHAR(256),
-    DepartmentName VARCHAR(256)
+    CourseName nvarchar(MAX),
+    DepartmentName nvarchar(MAX)
 );
 
 
@@ -276,7 +275,7 @@ CREATE TABLE FactAttendance (
     StudentKey INT NOT NULL,
     CourseKey INT NOT NULL,
     DateKey INT NOT NULL,
-    AttendanceStatus VARCHAR(256),
+    AttendanceStatus nvarchar(MAX),
 
     -- Foreign Keys
     CONSTRAINT FK_Fact_Student FOREIGN KEY (StudentKey)
@@ -302,6 +301,3 @@ CREATE TABLE FactEnrollment (
         REFERENCES DimCourse(CourseKey),
 
 );
-
-
-
