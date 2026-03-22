@@ -38,7 +38,7 @@ END
 CREATE TABLE DimDepartment (
     DepartmentKey INT IDENTITY(1,1) PRIMARY KEY,
     DepartmentID INT,
-    DepartmentName VARCHAR(256)
+    DepartmentName nvarchar(MAX)
 );
 
 --dimstudents creation
