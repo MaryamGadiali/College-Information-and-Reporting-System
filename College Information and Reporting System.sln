@@ -7,10 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "College Information and Rep
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "SSRS", "SSRS\SSRS.rptproj", "{99EA7652-3ADD-D658-E40B-A5B85C53A795}"
 EndProject
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "CollegeSSIS", "CollegeSSIS\CollegeSSIS.dtproj", "{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		DebugLocal|Any CPU = DebugLocal|Any CPU
+		Development|Any CPU = Development|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -18,6 +21,8 @@ Global
 		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
 		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.Development|Any CPU.ActiveCfg = Release|Any CPU
+		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.Development|Any CPU.Build.0 = Release|Any CPU
 		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E644305E-4FD5-41C2-80FD-2E6A4BCB983F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Debug|Any CPU.ActiveCfg = Debug
@@ -25,9 +30,20 @@ Global
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Debug|Any CPU.Deploy.0 = Debug
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Development|Any CPU.ActiveCfg = Release
+		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Development|Any CPU.Build.0 = Release
+		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Development|Any CPU.Deploy.0 = Release
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Release|Any CPU.ActiveCfg = Release
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Release|Any CPU.Build.0 = Release
 		{99EA7652-3ADD-D658-E40B-A5B85C53A795}.Release|Any CPU.Deploy.0 = Release
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.Debug|Any CPU.ActiveCfg = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.Debug|Any CPU.Build.0 = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.DebugLocal|Any CPU.ActiveCfg = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.DebugLocal|Any CPU.Build.0 = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.Development|Any CPU.ActiveCfg = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.Development|Any CPU.Build.0 = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.Release|Any CPU.ActiveCfg = Development
+		{58A3A775-BDC3-126F-72C1-7A5EA6D20F7D}.Release|Any CPU.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

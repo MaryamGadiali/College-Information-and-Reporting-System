@@ -1,0 +1,2517 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/21/2026 11:32:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MARYAMLAPTOP"
+  DTS:CreatorName="MaryamLaptop\Maryam"
+  DTS:DTSID="{17714797-9F6F-4560-8E1B-554E9A7CBB27}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{BCB6293B-03AD-47C5-9EE8-9E117262D6BC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CIRSDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{589696B8-C531-411F-87BB-14581178470C}"
+      DTS:ObjectName="CIRSDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MARYAMLAPTOP\MSSQLSERVER01;Initial Catalog=CIRS;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{589696B8-C531-411F-87BB-14581178470C}MARYAMLAPTOP\MSSQLSERVER01.CIRS;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CIRSDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F55A0CE0-E4FB-4A9A-A005-8BBE1AB52C1B}"
+      DTS:ObjectName="CIRSDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MARYAMLAPTOP\MSSQLSERVER01;Initial Catalog=cirsdw;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{F55A0CE0-E4FB-4A9A-A005-8BBE1AB52C1B}MARYAMLAPTOP\MSSQLSERVER01.cirsdw;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MARYAMLAPTOP\MSSQLSERVER01.CIRS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DD6DC64F-7D67-4841-B822-FB8427F23110}"
+      DTS:ObjectName="MARYAMLAPTOP\MSSQLSERVER01.CIRS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MARYAMLAPTOP\MSSQLSERVER01;Initial Catalog=CIRS;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load DimStudent (with SCD)"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{DA147B46-1D15-4EC9-A97D-275B0C06CDFA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load DimStudent (with SCD)"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load DimStudent (with SCD)\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input].Columns[studentDateOfBirth]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="studentDateOfBirth"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input].Columns[studentfirstname]"
+                      cachedDataType="nText"
+                      cachedName="studentfirstname"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input].Columns[studentLastName]"
+                      cachedDataType="nText"
+                      cachedName="studentLastName"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]"
+                      name="studentDateOfBirthN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentfirstnameN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentfirstnameN]"
+                      name="studentfirstnameN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentLastNameN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentLastNameN]"
+                      name="studentLastNameN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (with SCD)\Data Conversion 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Inputs[Data Conversion Input].Columns[StudentFullName]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="StudentFullName"
+                      lineageId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Output].Columns[StudentFullName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]"
+                      name="Copy of StudentFullName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Output].Columns[StudentFullName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (with SCD)\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (with SCD)\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Derived Column.Inputs[Derived Column Input].Columns[studentfirstnameN]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="studentfirstnameN"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentfirstnameN]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Derived Column.Inputs[Derived Column Input].Columns[studentLastNameN]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="studentLastNameN"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentLastNameN]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Output].Columns[StudentFullName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="101"
+                      lineageId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Output].Columns[StudentFullName]"
+                      name="StudentFullName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentfirstnameN]} + " " + #{Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentLastNameN]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">studentfirstnameN + " " + studentLastNameN</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (with SCD)\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimStudent]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (with SCD)\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].Columns[studentId]"
+                      cachedDataType="i4"
+                      cachedName="studentId"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].Columns[Copy of StudentFullName]"
+                      cachedDataType="nText"
+                      cachedName="Copy of StudentFullName"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFullName]"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].Columns[studentfirstname]"
+                      cachedDataType="nText"
+                      cachedName="studentfirstname"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFirstName]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].Columns[studentLastName]"
+                      cachedDataType="nText"
+                      cachedName="studentLastName"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentLastName]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].Columns[studentDateOfBirthN]"
+                      cachedDataType="dbDate"
+                      cachedName="studentDateOfBirthN"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentDob]"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentKey]"
+                      dataType="i4"
+                      name="StudentKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentID]"
+                      dataType="i4"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFullName]"
+                      dataType="nText"
+                      name="StudentFullName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFirstName]"
+                      dataType="nText"
+                      name="StudentFirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentLastName]"
+                      dataType="nText"
+                      name="StudentLastName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentDob]"
+                      dataType="dbDate"
+                      name="StudentDob" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (with SCD)\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DimStudent] SET [StudentDob] = ?,[StudentFirstName] = ?,[StudentFullName] = ?,[StudentLastName] = ? WHERE [StudentID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].Columns[studentDateOfBirthN]"
+                      cachedDataType="dbDate"
+                      cachedName="studentDateOfBirthN"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].Columns[studentfirstname]"
+                      cachedDataType="nText"
+                      cachedName="studentfirstname"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].Columns[Copy of StudentFullName]"
+                      cachedDataType="nText"
+                      cachedName="Copy of StudentFullName"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].Columns[studentId]"
+                      cachedDataType="i4"
+                      cachedName="studentId"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].Columns[studentLastName]"
+                      cachedDataType="nText"
+                      cachedName="studentLastName"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbDate"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="nText"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">193</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="nText"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">193</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="nText"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">193</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (with SCD)\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[students]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentId]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]"
+                      name="studentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentfirstname]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]"
+                      name="studentfirstname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentLastName]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]"
+                      name="studentLastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentGender]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentGender]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentGender]"
+                      name="studentGender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentDateOfBirth]"
+                      length="10"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]"
+                      name="studentDateOfBirth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEthnicity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEthnicity]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEthnicity]"
+                      name="studentEthnicity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentStartDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentStartDate]"
+                      length="10"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentStartDate]"
+                      name="studentStartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEndDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEndDate]"
+                      length="10"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEndDate]"
+                      name="studentEndDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]"
+                      name="status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdAt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdAt]"
+                      length="27"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdAt]"
+                      name="createdAt"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentId]"
+                      dataType="i4"
+                      name="studentId" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentfirstname]"
+                      dataType="nText"
+                      name="studentfirstname" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentLastName]"
+                      dataType="nText"
+                      name="studentLastName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentGender]"
+                      dataType="i4"
+                      name="studentGender" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentDateOfBirth]"
+                      dataType="wstr"
+                      length="10"
+                      name="studentDateOfBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEthnicity]"
+                      dataType="i4"
+                      name="studentEthnicity" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentStartDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="studentStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEndDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="studentEndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      dataType="i4"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdAt]"
+                      dataType="wstr"
+                      length="27"
+                      name="createdAt" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentId]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentId]"
+                      name="studentId" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentfirstname]"
+                      dataType="nText"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentfirstname]"
+                      name="studentfirstname" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentLastName]"
+                      dataType="nText"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentLastName]"
+                      name="studentLastName" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentGender]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentGender]"
+                      name="studentGender" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentDateOfBirth]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentDateOfBirth]"
+                      name="studentDateOfBirth" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEthnicity]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEthnicity]"
+                      name="studentEthnicity" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentStartDate]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentStartDate]"
+                      name="studentStartDate" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEndDate]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEndDate]"
+                      name="studentEndDate" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[status]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[status]"
+                      name="status" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdAt]"
+                      dataType="wstr"
+                      length="27"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdAt]"
+                      name="createdAt" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="Slowly Changing Dimension 1"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [StudentDob], [StudentFirstName], [StudentFullName], [StudentID], [StudentLastName] FROM [dbo].[DimStudent]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].Columns[studentDateOfBirthN]"
+                      cachedDataType="dbDate"
+                      cachedName="studentDateOfBirthN"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentDob]"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].Columns[studentfirstname]"
+                      cachedDataType="nText"
+                      cachedName="studentfirstname"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentFirstName]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].Columns[Copy of StudentFullName]"
+                      cachedDataType="nText"
+                      cachedName="Copy of StudentFullName"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentFullName]"
+                      lineageId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].Columns[studentId]"
+                      cachedDataType="i4"
+                      cachedName="studentId"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].Columns[studentLastName]"
+                      cachedDataType="nText"
+                      cachedName="studentLastName"
+                      externalMetadataColumnId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentLastName]"
+                      lineageId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">4</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentDob]"
+                      dataType="dbDate"
+                      name="StudentDob" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentFirstName]"
+                      dataType="nText"
+                      name="StudentFirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentFullName]"
+                      dataType="nText"
+                      name="StudentFullName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentID]"
+                      dataType="i4"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input].ExternalColumns[StudentLastName]"
+                      dataType="nText"
+                      name="StudentLastName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load DimStudent (with SCD).Paths[Data Conversion Output]"
+              endId="Package\Load DimStudent (with SCD)\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Load DimStudent (with SCD)\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load DimStudent (with SCD).Paths[Data Conversion Output1]"
+              endId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Inputs[Slowly Changing Dimension Input]"
+              name="Data Conversion Output"
+              startId="Package\Load DimStudent (with SCD)\Data Conversion 1.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load DimStudent (with SCD).Paths[Derived Column Output]"
+              endId="Package\Load DimStudent (with SCD)\Data Conversion 1.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Load DimStudent (with SCD)\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load DimStudent (with SCD).Paths[Inferred Member Updates Output]"
+              endId="Package\Load DimStudent (with SCD)\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Inferred Member Updates Output"
+              startId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[Inferred Member Updates Output]" />
+            <path
+              refId="Package\Load DimStudent (with SCD).Paths[New Output]"
+              endId="Package\Load DimStudent (with SCD)\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="New Output"
+              startId="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1.Outputs[New Output]" />
+            <path
+              refId="Package\Load DimStudent (with SCD).Paths[OLE DB Source Output]"
+              endId="Package\Load DimStudent (with SCD)\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load DimStudent (with SCD)\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load DimStudent (without SCD)"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{506948A0-9110-4359-B3E4-2935A88610E4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load DimStudent (without SCD)"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load DimStudent (without SCD)\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (without SCD)\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\Data Conversion.Inputs[Data Conversion Input].Columns[studentfirstname]"
+                      cachedDataType="nText"
+                      cachedName="studentfirstname"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\Data Conversion.Inputs[Data Conversion Input].Columns[studentLastName]"
+                      cachedDataType="nText"
+                      cachedName="studentLastName"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentfirstname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentfirstname]"
+                      name="Copy of studentfirstname"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentLastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentLastName]"
+                      name="Copy of studentLastName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (without SCD)\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (without SCD)\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\Derived Column.Inputs[Derived Column Input].Columns[Copy of studentfirstname]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of studentfirstname"
+                      lineageId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentfirstname]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\Derived Column.Inputs[Derived Column Input].Columns[Copy of studentLastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of studentLastName"
+                      lineageId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentLastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Output].Columns[fullname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="101"
+                      lineageId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Output].Columns[fullname]"
+                      name="fullname"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentfirstname]} + " " + #{Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of studentLastName]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[Copy of studentfirstname] + " " + [Copy of studentLastName]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (without SCD)\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimStudent]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimStudent]) [refTable]
+where [refTable].[StudentID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StudentKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentFullName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentFirstName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentLastName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentDob" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (without SCD)\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (without SCD)\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\Lookup.Inputs[Lookup Input].Columns[studentId]"
+                      cachedDataType="i4"
+                      cachedName="studentId"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">StudentID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Match Output].Columns[StudentID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Match Output].Columns[StudentID]"
+                      name="StudentID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StudentID</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (without SCD)\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimStudent]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[studentId]"
+                      cachedDataType="i4"
+                      cachedName="studentId"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[studentfirstname]"
+                      cachedDataType="nText"
+                      cachedName="studentfirstname"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFirstName]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[studentLastName]"
+                      cachedDataType="nText"
+                      cachedName="studentLastName"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentLastName]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[studentDateOfBirth]"
+                      cachedDataType="dbDate"
+                      cachedName="studentDateOfBirth"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentDob]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]" />
+                    <inputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[fullname]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="fullname"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFullName]"
+                      lineageId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Output].Columns[fullname]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentKey]"
+                      dataType="i4"
+                      name="StudentKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentID]"
+                      dataType="i4"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFullName]"
+                      dataType="nText"
+                      name="StudentFullName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentFirstName]"
+                      dataType="nText"
+                      name="StudentFirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentLastName]"
+                      dataType="nText"
+                      name="StudentLastName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentDob]"
+                      dataType="dbDate"
+                      name="StudentDob" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimStudent (without SCD)\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[students]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimStudent (without SCD)\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MARYAMLAPTOP\MSSQLSERVER01.CIRS]"
+                  connectionManagerRefId="Package.ConnectionManagers[MARYAMLAPTOP\MSSQLSERVER01.CIRS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentId]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]"
+                      name="studentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentfirstname]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]"
+                      name="studentfirstname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentLastName]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]"
+                      name="studentLastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentGender]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentGender]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentGender]"
+                      name="studentGender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentDateOfBirth]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentDateOfBirth]"
+                      name="studentDateOfBirth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEthnicity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEthnicity]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEthnicity]"
+                      name="studentEthnicity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentStartDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentStartDate]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentStartDate]"
+                      name="studentStartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEndDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEndDate]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentEndDate]"
+                      name="studentEndDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]"
+                      name="status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdAt]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdAt]"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdAt]"
+                      name="createdAt"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentId]"
+                      dataType="i4"
+                      name="studentId" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentfirstname]"
+                      dataType="nText"
+                      name="studentfirstname" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentLastName]"
+                      dataType="nText"
+                      name="studentLastName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentGender]"
+                      dataType="i4"
+                      name="studentGender" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentDateOfBirth]"
+                      dataType="dbDate"
+                      name="studentDateOfBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEthnicity]"
+                      dataType="i4"
+                      name="studentEthnicity" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentStartDate]"
+                      dataType="dbDate"
+                      name="studentStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentEndDate]"
+                      dataType="dbDate"
+                      name="studentEndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      dataType="i4"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdAt]"
+                      dataType="dbTimeStamp2"
+                      name="createdAt"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentId]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentId]"
+                      name="studentId" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentfirstname]"
+                      dataType="nText"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentfirstname]"
+                      name="studentfirstname" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentLastName]"
+                      dataType="nText"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentLastName]"
+                      name="studentLastName" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentGender]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentGender]"
+                      name="studentGender" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentDateOfBirth]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentDateOfBirth]"
+                      name="studentDateOfBirth" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEthnicity]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEthnicity]"
+                      name="studentEthnicity" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentStartDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentStartDate]"
+                      name="studentStartDate" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEndDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentEndDate]"
+                      name="studentEndDate" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[status]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[status]"
+                      name="status" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdAt]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdAt]"
+                      name="createdAt"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load DimStudent (without SCD).Paths[Data Conversion Output]"
+              endId="Package\Load DimStudent (without SCD)\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Load DimStudent (without SCD)\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load DimStudent (without SCD).Paths[Derived Column Output]"
+              endId="Package\Load DimStudent (without SCD)\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load DimStudent (without SCD)\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load DimStudent (without SCD).Paths[Lookup No Match Output]"
+              endId="Package\Load DimStudent (without SCD)\Data Conversion.Inputs[Data Conversion Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load DimStudent (without SCD)\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load DimStudent (without SCD).Paths[OLE DB Source Output]"
+              endId="Package\Load DimStudent (without SCD)\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load DimStudent (without SCD)\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="216,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)"
+          TopLeft="217.99999050051,70.4999992863128" />
+        <NodeLayout
+          Size="230.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)"
+          TopLeft="506.124977620319,72.5526308427227" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load DimStudent (with SCD)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Derived Column"
+          TopLeft="235.833333333333,210.14912281453" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\OLE DB Source"
+          TopLeft="236.5,5.49999999999993" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Data Conversion 1"
+          TopLeft="229.833333333333,313.5" />
+        <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Data Conversion"
+          TopLeft="234.5,108.166666666667" />
+        <NodeLayout
+          Size="221.333333333334,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1"
+          TopLeft="203.166666666667,416.166666666667" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Data Conversion Output]"
+          TopLeft="313.833333333333,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.3157894811967"
+              Start="0,0"
+              End="0,51.8157894811967">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.8157894811967" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[OLE DB Source Output]"
+          TopLeft="313.833333333333,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Derived Column Output]"
+          TopLeft="313.833333333333,252.815789481197">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.6842105188034"
+              Start="0,0"
+              End="0,53.1842105188034">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.1842105188034" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Data Conversion Output1]"
+          TopLeft="313.833333333333,356.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Insert Destination"
+          TopLeft="5.50000000000004,518.833333333333" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[New Output]"
+          TopLeft="278.277777777778,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-191.444444444444,60"
+              Start="0,0"
+              End="-191.444444444444,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2583732057416"
+                    Point2="0,24.2583732057416"
+                    Point3="-4,24.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-187.444444444444,24.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-187.444444444444,24.2583732057416"
+                    Point2="-191.444444444444,24.2583732057416"
+                    Point3="-191.444444444444,28.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-191.444444444444,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-122.813608940972,29.2583732057416,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\OLE DB Command"
+          TopLeft="228.5,518.833333333333" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Inferred Member Updates Output]"
+          TopLeft="349.388888888889,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-35.5555555555555,60"
+              Start="0,0"
+              End="-35.5555555555555,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2583732057416"
+                    Point2="0,24.2583732057416"
+                    Point3="-4,24.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-31.5555555555555,24.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-31.5555555555555,24.2583732057416"
+                    Point2="-35.5555555555555,24.2583732057416"
+                    Point3="-35.5555555555555,28.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-35.5555555555555,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-92.1807660590278,29.2583732057416,148.8059765625,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (with SCD)\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionID&gt;{F55A0CE0-E4FB-4A9A-A005-8BBE1AB52C1B}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[DimStudent]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentDob&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentFirstName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentFullName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentLastName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load DimStudent (without SCD)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\OLE DB Source"
+          TopLeft="178.299994850159,41.0999989390373" />
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\Lookup"
+          TopLeft="194.199994376302,148.399995741248" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[OLE DB Source Output]"
+          TopLeft="253.583327946564,83.766665605704">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.6333301355443"
+              Start="0,0"
+              End="0,57.1333301355443">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.1333301355443" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\OLE DB Destination"
+          TopLeft="179.499996602535,346.599991622568" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\Derived Column"
+          TopLeft="338.499989911914,267.999992012978" />
+        <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\Data Conversion"
+          TopLeft="423.49998754263,176.999994888902" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[Lookup No Match Output]"
+          TopLeft="308.866661042969,169.733329074582">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114.633326499661,28.5999991476536"
+              Start="0,0"
+              End="107.133326499661,28.5999991476536">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="53.3166632498305,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="53.3166632498305,0"
+                    Point2="57.3166632498305,0"
+                    Point3="57.3166632498305,4" />
+                  <mssgle:LineSegment
+                    End="57.3166632498305,24.5999991476536" />
+                  <mssgle:CubicBezierSegment
+                    Point1="57.3166632498305,24.5999991476536"
+                    Point2="57.3166632498305,28.5999991476536"
+                    Point3="61.3166632498305,28.5999991476536" />
+                  <mssgle:LineSegment
+                    End="107.133326499661,28.5999991476536" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="1.5102765310805,-17.609375,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[Data Conversion Output]"
+          TopLeft="502.833320875963,219.666661555569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-86.3333309640487,48.3333304574093"
+              Start="0,0"
+              End="-86.3333309640487,40.8333304574093">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1666652287047" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1666652287047"
+                    Point2="0,24.1666652287047"
+                    Point3="-4,24.1666652287047" />
+                  <mssgle:LineSegment
+                    End="-82.3333309640487,24.1666652287047" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-82.3333309640487,24.1666652287047"
+                    Point2="-86.3333309640487,24.1666652287047"
+                    Point3="-86.3333309640487,28.1666652287047" />
+                  <mssgle:LineSegment
+                    End="-86.3333309640487,40.8333304574093" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[Derived Column Output]"
+          TopLeft="416.499989911914,310.666658679645">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-149.666659976046,35.933332942923"
+              Start="0,0"
+              End="-149.666659976046,28.433332942923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.9666664714615" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.9666664714615"
+                    Point2="0,17.9666664714615"
+                    Point3="-4,17.9666664714615" />
+                  <mssgle:LineSegment
+                    End="-145.666659976046,17.9666664714615" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-145.666659976046,17.9666664714615"
+                    Point2="-149.666659976046,17.9666664714615"
+                    Point3="-149.666659976046,21.9666664714615" />
+                  <mssgle:LineSegment
+                    End="-149.666659976046,28.433332942923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (without SCD)\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (without SCD)\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStudent]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (without SCD)\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
