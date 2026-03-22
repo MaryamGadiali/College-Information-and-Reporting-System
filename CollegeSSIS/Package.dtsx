@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="54"
-  DTS:VersionGUID="{F01ABB63-DB44-4933-ACC5-5B3FB27E861A}">
+  DTS:VersionBuild="79"
+  DTS:VersionGUID="{D291CF82-0258-48EC-B354-7A6B105713F5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -228,7 +228,7 @@ where [refTable].[CourseID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Load DimCourse\17:invalid};</property>
+                  name="ParameterMap">#{Package\Load DimCourse\184:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -3227,7 +3227,1186 @@ where [refTable].[StudentID] = ?</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load FactAttendance"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{128675AA-8EF9-4B5B-9BDB-2666AFCE0872}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load FactAttendance"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load FactAttendance\course key lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="course key lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCourse]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCourse]) [refTable]
+where [refTable].[CourseID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CourseKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CourseID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CourseName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[courseId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactAttendance\course key lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactAttendance\course key lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\course key lookup.Inputs[Lookup Input].Columns[courseId]"
+                      cachedDataType="i4"
+                      cachedName="courseId"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[courseId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CourseID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactAttendance\course key lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output].Columns[CourseKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output].Columns[CourseKey]"
+                      name="CourseKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CourseKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\course key lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactAttendance\course key lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactAttendance\course key lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactAttendance\Date key lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Date key lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimDate]) [refTable]
+where [refTable].[FullDate] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullDate" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="Year" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Month" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MonthName" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Day" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DayName" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attdate]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactAttendance\Date key lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactAttendance\Date key lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\Date key lookup.Inputs[Lookup Input].Columns[attdate]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="attdate"
+                      cachedScale="7"
+                      lineageId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attdate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">FullDate</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactAttendance\Date key lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactAttendance\Date key lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactAttendance\Date key lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactAttendance\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load FactAttendance\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\Derived Column.Inputs[Derived Column Input].Columns[attendanceTime]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="attendanceTime"
+                      cachedScale="7"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceTime]" />
+                    <inputColumn
+                      refId="Package\Load FactAttendance\Derived Column.Inputs[Derived Column Input].Columns[attendanceStatus]"
+                      cachedDataType="i4"
+                      cachedName="attendanceStatus"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceStatus]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load FactAttendance\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attdate]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attdate]"
+                      name="attdate"
+                      scale="7"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP2,7)(DT_DBTIMESTAMP)(DT_DBDATE)#{Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceTime]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP2,7)(DT_DBTIMESTAMP)(DT_DBDATE)attendanceTime</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attstatus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attstatus]"
+                      name="attstatus"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceStatus]} == 0 ? "Present" : "Other"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">attendanceStatus == 0 ? "Present" : "Other"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load FactAttendance\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactAttendance\Existing check"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Existing check"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[FactAttendance]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[FactAttendance]) [refTable]
+where [refTable].[StudentKey] = ? and [refTable].[CourseKey] = ? and [refTable].[DateKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="AttendanceKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CourseKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AttendanceStatus" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output].Columns[StudentKey]};#{Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output].Columns[CourseKey]};#{Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output].Columns[DateKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactAttendance\Existing check.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input].Columns[StudentKey]"
+                      cachedDataType="i4"
+                      cachedName="StudentKey"
+                      lineageId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output].Columns[StudentKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">StudentKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input].Columns[CourseKey]"
+                      cachedDataType="i4"
+                      cachedName="CourseKey"
+                      lineageId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output].Columns[CourseKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CourseKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      lineageId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output].Columns[DateKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">DateKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\Existing check.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Existing check.Outputs[Lookup Match Output].Columns[AttendanceKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactAttendance\Existing check.Outputs[Lookup Match Output].Columns[AttendanceKey]"
+                      name="AttendanceKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AttendanceKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\Existing check.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\Existing check.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Existing check.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\Existing check.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\Existing check.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\Existing check.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactAttendance\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactAttendance]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactAttendance\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StudentKey]"
+                      cachedDataType="i4"
+                      cachedName="StudentKey"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentKey]"
+                      lineageId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output].Columns[StudentKey]" />
+                    <inputColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CourseKey]"
+                      cachedDataType="i4"
+                      cachedName="CourseKey"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseKey]"
+                      lineageId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output].Columns[CourseKey]" />
+                    <inputColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[attstatus]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="attstatus"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendanceStatus]"
+                      lineageId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output].Columns[attstatus]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendanceKey]"
+                      dataType="i4"
+                      name="AttendanceKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StudentKey]"
+                      dataType="i4"
+                      name="StudentKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseKey]"
+                      dataType="i4"
+                      name="CourseKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendanceStatus]"
+                      dataType="nText"
+                      name="AttendanceStatus" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactAttendance\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[attendances]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactAttendance\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MARYAMLAPTOP\MSSQLSERVER01.CIRS]"
+                  connectionManagerRefId="Package.ConnectionManagers[MARYAMLAPTOP\MSSQLSERVER01.CIRS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[attendanceId]"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceId]"
+                      name="attendanceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceTime]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[attendanceTime]"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceTime]"
+                      name="attendanceTime"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceStatus]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[attendanceStatus]"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[attendanceStatus]"
+                      name="attendanceStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentId]"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]"
+                      name="studentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[courseId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[courseId]"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[courseId]"
+                      name="courseId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[attendanceId]"
+                      dataType="i4"
+                      name="attendanceId" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[attendanceTime]"
+                      dataType="dbTimeStamp2"
+                      name="attendanceTime"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[attendanceStatus]"
+                      dataType="i4"
+                      name="attendanceStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[studentId]"
+                      dataType="i4"
+                      name="studentId" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[courseId]"
+                      dataType="i4"
+                      name="courseId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[attendanceId]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[attendanceId]"
+                      name="attendanceId" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[attendanceTime]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[attendanceTime]"
+                      name="attendanceTime"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[attendanceStatus]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[attendanceStatus]"
+                      name="attendanceStatus" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentId]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[studentId]"
+                      name="studentId" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[courseId]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[courseId]"
+                      name="courseId" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactAttendance\student key lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="student key lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimStudent]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimStudent]) [refTable]
+where [refTable].[StudentID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StudentKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentFullName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentFirstName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentLastName" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StudentDob" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactAttendance\student key lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CIRSDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[CIRSDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactAttendance\student key lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactAttendance\student key lookup.Inputs[Lookup Input].Columns[studentId]"
+                      cachedDataType="i4"
+                      cachedName="studentId"
+                      lineageId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">StudentID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactAttendance\student key lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output].Columns[StudentKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output].Columns[StudentKey]"
+                      name="StudentKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StudentKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\student key lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactAttendance\student key lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactAttendance\student key lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load FactAttendance.Paths[Derived Column Output]"
+              endId="Package\Load FactAttendance\Date key lookup.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load FactAttendance\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load FactAttendance.Paths[Lookup Match Output]"
+              endId="Package\Load FactAttendance\course key lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactAttendance\student key lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactAttendance.Paths[Lookup Match Output1]"
+              endId="Package\Load FactAttendance\Derived Column.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactAttendance\course key lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactAttendance.Paths[Lookup Match Output2]"
+              endId="Package\Load FactAttendance\Existing check.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactAttendance\Date key lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactAttendance.Paths[Lookup No Match Output]"
+              endId="Package\Load FactAttendance\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load FactAttendance\Existing check.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load FactAttendance.Paths[OLE DB Source Output]"
+              endId="Package\Load FactAttendance\student key lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load FactAttendance\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D3D7A5CF-EE9C-4708-ADFE-3E2484A2C513}"
+      DTS:From="Package\Load DimStudent (without SCD)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load DimCourse" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D178A4E0-A80B-4DB5-9F1E-6F1487BD8606}"
+      DTS:From="Package\Load DimCourse"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load DimDepartment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7352270D-B51B-4BEA-82DA-480D106671D1}"
+      DTS:From="Package\Load DimDepartment"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load FactAttendance" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -3239,7 +4418,15 @@ where [refTable].[StudentID] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42.6666666666667"
+          Id="Package\Load DimCourse"
+          TopLeft="236.749991003424,269.499997430726" />
+        <NodeLayout
+          Size="181.333333333334,42.6666666666667"
+          Id="Package\Load DimDepartment"
+          TopLeft="212.374993434177,388.447364875155" />
         <NodeLayout
           Size="216,42.6666666666667"
           Id="Package\Load DimStudent (with SCD)"
@@ -3247,508 +4434,161 @@ where [refTable].[StudentID] = ?</property>
         <NodeLayout
           Size="230.666666666667,42.6666666666667"
           Id="Package\Load DimStudent (without SCD)"
-          TopLeft="20.4999993294477,140.289472204249" />
-        <NodeLayout
-          Size="160,42.6666666666667"
-          Id="Package\Load DimCourse"
-          TopLeft="339.249986421317,95.0263151358865" />
+          TopLeft="208.624990919605,147.815787911085" />
         <NodeLayout
           Size="181.333333333334,42.6666666666667"
-          Id="Package\Load DimDepartment"
-          TopLeft="605.49997586012,109.289473203411" />
+          Id="Package\Load FactAttendance"
+          TopLeft="189.249995809048,494.39473246232" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="320.354157628181,190.482454577752">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79.0175428529746"
+              Start="0,0"
+              End="0,71.5175428529746">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.5175428529746" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="316.749991003424,312.166664097393">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-13.7083309025808,76.2807007777616"
+              Start="0,0"
+              End="-13.7083309025808,68.7807007777616">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.1403503888808" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.1403503888808"
+                    Point2="0,38.1403503888808"
+                    Point3="-4,38.1403503888808" />
+                  <mssgle:LineSegment
+                    End="-9.70833090258083,38.1403503888808" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9.70833090258083,38.1403503888808"
+                    Point2="-13.7083309025808,38.1403503888808"
+                    Point3="-13.7083309025808,42.1403503888808" />
+                  <mssgle:LineSegment
+                    End="-13.7083309025808,68.7807007777616" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="303.041660100843,431.114031541821">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-23.1249976251283,63.2807009204988"
+              Start="0,0"
+              End="-23.1249976251283,55.7807009204988">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.6403504602494" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.6403504602494"
+                    Point2="0,31.6403504602494"
+                    Point3="-4,31.6403504602494" />
+                  <mssgle:LineSegment
+                    End="-19.1249976251283,31.6403504602494" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19.1249976251283,31.6403504602494"
+                    Point2="-23.1249976251283,31.6403504602494"
+                    Point3="-23.1249976251283,35.6403504602494" />
+                  <mssgle:LineSegment
+                    End="-23.1249976251283,55.7807009204988" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <TaskHost
-    design-time-name="Package\Load DimStudent (with SCD)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="156,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\Derived Column"
-          TopLeft="235.833333333333,210.14912281453" />
-        <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\OLE DB Source"
-          TopLeft="236.5,5.49999999999993" />
-        <NodeLayout
-          Size="168,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\Data Conversion 1"
-          TopLeft="229.833333333333,313.5" />
-        <NodeLayout
-          Size="158.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\Data Conversion"
-          TopLeft="234.5,108.166666666667" />
-        <NodeLayout
-          Size="221.333333333334,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1"
-          TopLeft="203.166666666667,416.166666666667" />
-        <EdgeLayout
-          Id="Package\Load DimStudent (with SCD).Paths[Data Conversion Output]"
-          TopLeft="313.833333333333,150.833333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.3157894811967"
-              Start="0,0"
-              End="0,51.8157894811967">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,51.8157894811967" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load DimStudent (with SCD).Paths[OLE DB Source Output]"
-          TopLeft="313.833333333333,48.1666666666666">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load DimStudent (with SCD).Paths[Derived Column Output]"
-          TopLeft="313.833333333333,252.815789481197">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.6842105188034"
-              Start="0,0"
-              End="0,53.1842105188034">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.1842105188034" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load DimStudent (with SCD).Paths[Data Conversion Output1]"
-          TopLeft="313.833333333333,356.166666666667">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="162.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\Insert Destination"
-          TopLeft="5.50000000000004,518.833333333333" />
-        <EdgeLayout
-          Id="Package\Load DimStudent (with SCD).Paths[New Output]"
-          TopLeft="278.277777777778,458.833333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-191.444444444444,60"
-              Start="0,0"
-              End="-191.444444444444,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.2583732057416" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.2583732057416"
-                    Point2="0,24.2583732057416"
-                    Point3="-4,24.2583732057416" />
-                  <mssgle:LineSegment
-                    End="-187.444444444444,24.2583732057416" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-187.444444444444,24.2583732057416"
-                    Point2="-191.444444444444,24.2583732057416"
-                    Point3="-191.444444444444,28.2583732057416" />
-                  <mssgle:LineSegment
-                    End="-191.444444444444,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-122.813608940972,29.2583732057416,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="170.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (with SCD)\OLE DB Command"
-          TopLeft="228.5,518.833333333333" />
-        <EdgeLayout
-          Id="Package\Load DimStudent (with SCD).Paths[Inferred Member Updates Output]"
-          TopLeft="349.388888888889,458.833333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-35.5555555555555,60"
-              Start="0,0"
-              End="-35.5555555555555,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.2583732057416" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.2583732057416"
-                    Point2="0,24.2583732057416"
-                    Point3="-4,24.2583732057416" />
-                  <mssgle:LineSegment
-                    End="-31.5555555555555,24.2583732057416" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-31.5555555555555,24.2583732057416"
-                    Point2="-35.5555555555555,24.2583732057416"
-                    Point3="-35.5555555555555,28.2583732057416" />
-                  <mssgle:LineSegment
-                    End="-35.5555555555555,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-92.1807660590278,29.2583732057416,148.8059765625,11.658203125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load DimStudent (with SCD)\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1">
-    <Properties>
-      <Property>
-        <Name>SCDMetadata</Name>
-        <Value
-          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionID&gt;{F55A0CE0-E4FB-4A9A-A005-8BBE1AB52C1B}&lt;/ConnectionID&gt;
-  &lt;TableName&gt;[dbo].[DimStudent]&lt;/TableName&gt;
-  &lt;InputToColumnsCollection&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;StudentDob&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;StudentFirstName&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;StudentFullName&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;StudentID&lt;/ColumnName&gt;
-      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
-      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;StudentLastName&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-  &lt;/InputToColumnsCollection&gt;
-  &lt;GeneratedComponentsIdentificationStrings&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
-  &lt;/GeneratedComponentsIdentificationStrings&gt;
-  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
-  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
-  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
-  &lt;CurrentIndicatorColumn /&gt;
-  &lt;InferredIndicatorColumn /&gt;
-  &lt;ValueCurrent /&gt;
-  &lt;ValueExpired /&gt;
-  &lt;StartDateColumn /&gt;
-  &lt;EndDateColumn /&gt;
-  &lt;DateVariable /&gt;
-  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
-&lt;/SCDWizardMetadata&gt;</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Load DimStudent (without SCD)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (without SCD)\OLE DB Source"
-          TopLeft="178.299994850159,41.0999989390373" />
-        <NodeLayout
-          Size="114.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (without SCD)\Lookup"
-          TopLeft="194.199994376302,148.399995741248" />
-        <EdgeLayout
-          Id="Package\Load DimStudent (without SCD).Paths[OLE DB Source Output]"
-          TopLeft="253.583327946564,83.766665605704">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,64.6333301355443"
-              Start="0,0"
-              End="0,57.1333301355443">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,57.1333301355443" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="174.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (without SCD)\OLE DB Destination"
-          TopLeft="179.499996602535,346.599991622568" />
-        <NodeLayout
-          Size="156,42.6666666666667"
-          Id="Package\Load DimStudent (without SCD)\Derived Column"
-          TopLeft="338.499989911914,267.999992012978" />
-        <NodeLayout
-          Size="158.666666666667,42.6666666666667"
-          Id="Package\Load DimStudent (without SCD)\Data Conversion"
-          TopLeft="423.49998754263,176.999994888902" />
-        <EdgeLayout
-          Id="Package\Load DimStudent (without SCD).Paths[Lookup No Match Output]"
-          TopLeft="308.866661042969,169.733329074582">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="114.633326499661,28.5999991476536"
-              Start="0,0"
-              End="107.133326499661,28.5999991476536">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="53.3166632498305,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="53.3166632498305,0"
-                    Point2="57.3166632498305,0"
-                    Point3="57.3166632498305,4" />
-                  <mssgle:LineSegment
-                    End="57.3166632498305,24.5999991476536" />
-                  <mssgle:CubicBezierSegment
-                    Point1="57.3166632498305,24.5999991476536"
-                    Point2="57.3166632498305,28.5999991476536"
-                    Point3="61.3166632498305,28.5999991476536" />
-                  <mssgle:LineSegment
-                    End="107.133326499661,28.5999991476536" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="1.5102765310805,-17.609375,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load DimStudent (without SCD).Paths[Data Conversion Output]"
-          TopLeft="502.833320875963,219.666661555569">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-86.3333309640487,48.3333304574093"
-              Start="0,0"
-              End="-86.3333309640487,40.8333304574093">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.1666652287047" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.1666652287047"
-                    Point2="0,24.1666652287047"
-                    Point3="-4,24.1666652287047" />
-                  <mssgle:LineSegment
-                    End="-82.3333309640487,24.1666652287047" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-82.3333309640487,24.1666652287047"
-                    Point2="-86.3333309640487,24.1666652287047"
-                    Point3="-86.3333309640487,28.1666652287047" />
-                  <mssgle:LineSegment
-                    End="-86.3333309640487,40.8333304574093" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load DimStudent (without SCD).Paths[Derived Column Output]"
-          TopLeft="416.499989911914,310.666658679645">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-149.666659976046,35.933332942923"
-              Start="0,0"
-              End="-149.666659976046,28.433332942923">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.9666664714615" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.9666664714615"
-                    Point2="0,17.9666664714615"
-                    Point3="-4,17.9666664714615" />
-                  <mssgle:LineSegment
-                    End="-145.666659976046,17.9666664714615" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-145.666659976046,17.9666664714615"
-                    Point2="-149.666659976046,17.9666664714615"
-                    Point3="-149.666659976046,21.9666664714615" />
-                  <mssgle:LineSegment
-                    End="-149.666659976046,28.433332942923" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load DimStudent (without SCD)\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load DimStudent (without SCD)\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimStudent]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load DimStudent (without SCD)\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Load DimCourse">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="114.666666666667,42.6666666666667"
-          Id="Package\Load DimCourse\Lookup"
-          TopLeft="264.999994054437,142.99999769032" />
-        <NodeLayout
           Size="174.666666666667,42.6666666666667"
           Id="Package\Load DimCourse\OLE DB Destination"
           TopLeft="240.999995663762,310.499993592501" />
         <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Load DimCourse\OLE DB Source"
+          TopLeft="235.499997615814,36.0000035613774" />
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\Load DimCourse\Lookup"
+          TopLeft="264.999994054437,142.99999769032" />
+        <NodeLayout
           Size="158.666666666667,42.6666666666667"
           Id="Package\Load DimCourse\Data Conversion"
           TopLeft="349.49999332428,218.999997213483" />
+        <EdgeLayout
+          Id="Package\Load DimCourse.Paths[OLE DB Source Output]"
+          TopLeft="312.833330949148,78.6666702280441">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.49999643862247,64.333327462276"
+              Start="0,0"
+              End="9.49999643862247,56.833327462276">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.166663731138" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.166663731138"
+                    Point2="0,32.166663731138"
+                    Point3="4,32.166663731138" />
+                  <mssgle:LineSegment
+                    End="5.49999643862247,32.166663731138" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.49999643862247,32.166663731138"
+                    Point2="9.49999643862247,32.166663731138"
+                    Point3="9.49999643862247,36.166663731138" />
+                  <mssgle:LineSegment
+                    End="9.49999643862247,56.833327462276" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load DimCourse.Paths[Lookup No Match Output]"
           TopLeft="322.33332738777,185.666664356987">
@@ -3816,73 +4656,14 @@ where [refTable].[StudentID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Load DimCourse\OLE DB Source"
-          TopLeft="235.499997615814,36.0000035613774" />
-        <EdgeLayout
-          Id="Package\Load DimCourse.Paths[OLE DB Source Output]"
-          TopLeft="312.833330949148,78.6666702280441">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="9.49999643862247,64.333327462276"
-              Start="0,0"
-              End="9.49999643862247,56.833327462276">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.166663731138" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,28.166663731138"
-                    Point2="0,32.166663731138"
-                    Point3="4,32.166663731138" />
-                  <mssgle:LineSegment
-                    End="5.49999643862247,32.166663731138" />
-                  <mssgle:CubicBezierSegment
-                    Point1="5.49999643862247,32.166663731138"
-                    Point2="9.49999643862247,32.166663731138"
-                    Point3="9.49999643862247,36.166663731138" />
-                  <mssgle:LineSegment
-                    End="9.49999643862247,56.833327462276" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load DimCourse\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimCourse]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load DimCourse\OLE DB Destination">
     <Properties>
@@ -3904,27 +4685,50 @@ where [refTable].[StudentID] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimCourse\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCourse]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Load DimDepartment">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="154.666666666667,42"
-          Id="Package\Load DimDepartment\OLE DB Source"
-          TopLeft="230.999993279577,97.9999972432853" />
-        <NodeLayout
-          Size="174.666666666667,42.6666666666667"
-          Id="Package\Load DimDepartment\OLE DB Destination"
-          TopLeft="193.999994382262,380.999988809228" />
-        <NodeLayout
           Size="114.666666666667,42.6666666666667"
           Id="Package\Load DimDepartment\Lookup"
           TopLeft="239.499993920326,273.999992892146" />
         <NodeLayout
+          Size="154.666666666667,42"
+          Id="Package\Load DimDepartment\OLE DB Source"
+          TopLeft="230.999993279577,97.9999972432853" />
+        <NodeLayout
           Size="158.666666666667,42.6666666666667"
           Id="Package\Load DimDepartment\Data Conversion"
           TopLeft="365.999991044402,315.999992534519" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Load DimDepartment\OLE DB Destination"
+          TopLeft="193.999994382262,380.999988809228" />
         <EdgeLayout
           Id="Package\Load DimDepartment.Paths[OLE DB Source Output]"
           TopLeft="308.33332661291,139.999997243285">
@@ -3956,7 +4760,9 @@ where [refTable].[StudentID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4014,12 +4820,37 @@ where [refTable].[StudentID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimDepartment\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimDepartment]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load DimDepartment\OLE DB Source">
     <Properties>
@@ -4046,23 +4877,839 @@ where [refTable].[StudentID] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load DimStudent (with SCD)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Derived Column"
+          TopLeft="235.833333333333,210.14912281453" />
+        <NodeLayout
+          Size="221.333333333334,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1"
+          TopLeft="203.166666666667,416.166666666667" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\OLE DB Source"
+          TopLeft="236.5,5.49999999999993" />
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Insert Destination"
+          TopLeft="5.50000000000004,518.833333333333" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Data Conversion 1"
+          TopLeft="229.833333333333,313.5" />
+        <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\Data Conversion"
+          TopLeft="234.5,108.166666666667" />
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (with SCD)\OLE DB Command"
+          TopLeft="228.5,518.833333333333" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[OLE DB Source Output]"
+          TopLeft="313.833333333333,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[New Output]"
+          TopLeft="278.277777777778,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-191.444444444444,60"
+              Start="0,0"
+              End="-191.444444444444,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2583732057416"
+                    Point2="0,24.2583732057416"
+                    Point3="-4,24.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-187.444444444444,24.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-187.444444444444,24.2583732057416"
+                    Point2="-191.444444444444,24.2583732057416"
+                    Point3="-191.444444444444,28.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-191.444444444444,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-122.813608940972,29.2583732057416,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Inferred Member Updates Output]"
+          TopLeft="349.388888888889,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-35.5555555555555,60"
+              Start="0,0"
+              End="-35.5555555555555,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2583732057416"
+                    Point2="0,24.2583732057416"
+                    Point3="-4,24.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-31.5555555555555,24.2583732057416" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-31.5555555555555,24.2583732057416"
+                    Point2="-35.5555555555555,24.2583732057416"
+                    Point3="-35.5555555555555,28.2583732057416" />
+                  <mssgle:LineSegment
+                    End="-35.5555555555555,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-92.1807660590278,29.2583732057416,148.8059765625,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Derived Column Output]"
+          TopLeft="313.833333333333,252.815789481197">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.6842105188034"
+              Start="0,0"
+              End="0,53.1842105188034">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.1842105188034" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Data Conversion Output1]"
+          TopLeft="313.833333333333,356.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (with SCD).Paths[Data Conversion Output]"
+          TopLeft="313.833333333333,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.3157894811967"
+              Start="0,0"
+              End="0,51.8157894811967">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.8157894811967" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load DimDepartment\Lookup">
+    design-time-name="Package\Load DimStudent (with SCD)\Slowly Changing Dimension 1">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
+        <Name>SCDMetadata</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionID&gt;{F55A0CE0-E4FB-4A9A-A005-8BBE1AB52C1B}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[DimStudent]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Data Conversion.Outputs[Data Conversion Output].Columns[studentDateOfBirthN]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentDob&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentfirstname]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentFirstName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of StudentFullName]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentFullName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentId]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[studentLastName]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StudentLastName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;FixedAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
       </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (with SCD)\OLE DB Source">
+    <Properties>
       <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimDepartment]</Value>
+        <Name>DataSourceViewID</Name>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load DimStudent (without SCD)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\Derived Column"
+          TopLeft="338.499989911914,267.999992012978" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\OLE DB Source"
+          TopLeft="178.299994850159,41.0999989390373" />
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\Lookup"
+          TopLeft="194.199994376302,148.399995741248" />
+        <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\Data Conversion"
+          TopLeft="423.49998754263,176.999994888902" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Load DimStudent (without SCD)\OLE DB Destination"
+          TopLeft="179.499996602535,346.599991622568" />
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[Data Conversion Output]"
+          TopLeft="502.833320875963,219.666661555569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-86.3333309640487,48.3333304574093"
+              Start="0,0"
+              End="-86.3333309640487,40.8333304574093">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1666652287047" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1666652287047"
+                    Point2="0,24.1666652287047"
+                    Point3="-4,24.1666652287047" />
+                  <mssgle:LineSegment
+                    End="-82.3333309640487,24.1666652287047" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-82.3333309640487,24.1666652287047"
+                    Point2="-86.3333309640487,24.1666652287047"
+                    Point3="-86.3333309640487,28.1666652287047" />
+                  <mssgle:LineSegment
+                    End="-86.3333309640487,40.8333304574093" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[OLE DB Source Output]"
+          TopLeft="253.583327946564,83.766665605704">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.6333301355443"
+              Start="0,0"
+              End="0,57.1333301355443">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.1333301355443" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[Lookup No Match Output]"
+          TopLeft="308.866661042969,169.733329074582">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114.633326499661,28.5999991476536"
+              Start="0,0"
+              End="107.133326499661,28.5999991476536">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="53.3166632498305,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="53.3166632498305,0"
+                    Point2="57.3166632498305,0"
+                    Point3="57.3166632498305,4" />
+                  <mssgle:LineSegment
+                    End="57.3166632498305,24.5999991476536" />
+                  <mssgle:CubicBezierSegment
+                    Point1="57.3166632498305,24.5999991476536"
+                    Point2="57.3166632498305,28.5999991476536"
+                    Point3="61.3166632498305,28.5999991476536" />
+                  <mssgle:LineSegment
+                    End="107.133326499661,28.5999991476536" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="1.5102765310805,-17.609375,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimStudent (without SCD).Paths[Derived Column Output]"
+          TopLeft="416.499989911914,310.666658679645">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-149.666659976046,35.933332942923"
+              Start="0,0"
+              End="-149.666659976046,28.433332942923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.9666664714615" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.9666664714615"
+                    Point2="0,17.9666664714615"
+                    Point3="-4,17.9666664714615" />
+                  <mssgle:LineSegment
+                    End="-145.666659976046,17.9666664714615" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-145.666659976046,17.9666664714615"
+                    Point2="-149.666659976046,17.9666664714615"
+                    Point3="-149.666659976046,21.9666664714615" />
+                  <mssgle:LineSegment
+                    End="-149.666659976046,28.433332942923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (without SCD)\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStudent]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (without SCD)\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimStudent (without SCD)\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load FactAttendance">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\Load FactAttendance\Existing check"
+          TopLeft="322.374987175689,454.921048026419" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Load FactAttendance\OLE DB Destination"
+          TopLeft="224.374999484048,570.499991133025" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Load FactAttendance\Date key lookup"
+          TopLeft="157.500000834465,325.499995827675" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Load FactAttendance\OLE DB Source"
+          TopLeft="70.8333313862483,14.1666664083799" />
+        <NodeLayout
+          Size="165.333333333334,42.6666666666667"
+          Id="Package\Load FactAttendance\course key lookup"
+          TopLeft="117.49999755621,212.16666140159" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Load FactAttendance\Derived Column"
+          TopLeft="350.499984577299,250.447365731579" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Load FactAttendance\student key lookup"
+          TopLeft="108.83333025376,112.833330134551" />
+        <EdgeLayout
+          Id="Package\Load FactAttendance.Paths[OLE DB Source Output]"
+          TopLeft="148.166664719582,56.8333330750466">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.6666655341784,55.9999970595043"
+              Start="0,0"
+              End="44.6666655341784,48.4999970595043">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.9999985297521" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.9999985297521"
+                    Point2="0,27.9999985297521"
+                    Point3="4,27.9999985297521" />
+                  <mssgle:LineSegment
+                    End="40.6666655341784,27.9999985297521" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.6666655341784,27.9999985297521"
+                    Point2="44.6666655341784,27.9999985297521"
+                    Point3="44.6666655341784,31.9999985297521" />
+                  <mssgle:LineSegment
+                    End="44.6666655341784,48.4999970595043" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactAttendance.Paths[Lookup No Match Output]"
+          TopLeft="396.374987175689,497.587714693085">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-84.6666543583075,72.9122764399396"
+              Start="0,0"
+              End="-84.6666543583075,65.4122764399396">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.4561382199698" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.4561382199698"
+                    Point2="0,36.4561382199698"
+                    Point3="-4,36.4561382199698" />
+                  <mssgle:LineSegment
+                    End="-80.6666543583075,36.4561382199698" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-80.6666543583075,36.4561382199698"
+                    Point2="-84.6666543583075,36.4561382199698"
+                    Point3="-84.6666543583075,40.4561382199698" />
+                  <mssgle:LineSegment
+                    End="-84.6666543583075,65.4122764399396" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-98.1397138979038,41.4561382199698,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactAttendance.Paths[Lookup Match Output2]"
+          TopLeft="235.500000834465,368.166662494342">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="160.874986341224,86.754385532077"
+              Start="0,0"
+              End="160.874986341224,79.254385532077">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.3771927660385" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.3771927660385"
+                    Point2="0,43.3771927660385"
+                    Point3="4,43.3771927660385" />
+                  <mssgle:LineSegment
+                    End="156.874986341224,43.3771927660385" />
+                  <mssgle:CubicBezierSegment
+                    Point1="156.874986341224,43.3771927660385"
+                    Point2="160.874986341224,43.3771927660385"
+                    Point3="160.874986341224,47.3771927660385" />
+                  <mssgle:LineSegment
+                    End="160.874986341224,79.254385532077" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="32.2461064518618,48.3771927660385,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactAttendance.Paths[Lookup Match Output1]"
+          TopLeft="282.833330889543,233.499994734923">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67.6666536877554,38.2807043299889"
+              Start="0,0"
+              End="60.1666536877554,38.2807043299889">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.8333268438777,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.8333268438777,0"
+                    Point2="33.8333268438777,0"
+                    Point3="33.8333268438777,4" />
+                  <mssgle:LineSegment
+                    End="33.8333268438777,34.2807043299889" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.8333268438777,34.2807043299889"
+                    Point2="33.8333268438777,38.2807043299889"
+                    Point3="37.8333268438777,38.2807043299889" />
+                  <mssgle:LineSegment
+                    End="60.1666536877554,38.2807043299889" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-14.3580598748723,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactAttendance.Paths[Lookup Match Output]"
+          TopLeft="196.499997238318,155.499996801218">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.6666646003724"
+              Start="0,0"
+              End="0,49.1666646003724">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.1666646003724" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,18.7786448001862,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactAttendance.Paths[Derived Column Output]"
+          TopLeft="428.499984577299,293.114032398246">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-192.999983742834,32.3859634294294"
+              Start="0,0"
+              End="-192.999983742834,24.8859634294294">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.1929817147147" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.1929817147147"
+                    Point2="0,16.1929817147147"
+                    Point3="-4,16.1929817147147" />
+                  <mssgle:LineSegment
+                    End="-188.999983742834,16.1929817147147" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-188.999983742834,16.1929817147147"
+                    Point2="-192.999983742834,16.1929817147147"
+                    Point3="-192.999983742834,20.1929817147147" />
+                  <mssgle:LineSegment
+                    End="-192.999983742834,24.8859634294294" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactAttendance\Existing check">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[FactAttendance]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactAttendance\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactAttendance\Date key lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimDate]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactAttendance\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactAttendance\course key lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCourse]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactAttendance\student key lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStudent]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
